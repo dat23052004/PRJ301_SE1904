@@ -82,6 +82,8 @@
                                     </ul>
                                 </div>
                                 <!--categorie menu end-->
+                                
+                                
                                 <c:if test="${sessionScope.WISHLIST != null}">
                                     <!--wishlist block start-->
                                     <div class="sidebar_widget wishlist mb-35" id="wishlist-small">
