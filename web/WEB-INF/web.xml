@@ -9,7 +9,7 @@
         <filter-name>LoginFilter</filter-name>
         <filter-class>clothingstore.filter.LoginFilter</filter-class>
     </filter>
-    
+
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/AdminServlet</url-pattern>
@@ -27,7 +27,7 @@
         <url-pattern>/ManageSupplierServlet</url-pattern>
         <url-pattern>/ManageUserServlet</url-pattern>
     </filter-mapping>
-    
+
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/EditProfileServlet</url-pattern>
@@ -52,7 +52,7 @@
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>clothingstore.controller.web.profile.ProfileServlet</servlet-class>
     </servlet>
-    
+
     <servlet>
         <servlet-name>EditProfileServlet</servlet-name>
         <servlet-class>clothingstore.controller.web.profile.EditProfileServlet</servlet-class>
@@ -97,11 +97,12 @@
         <session-timeout>
             30
         </session-timeout>
-    </session-config>
-    -->
+    </session-config>-->
+    
     <welcome-file-list>
         <welcome-file>DispatchServlet</welcome-file>
     </welcome-file-list>
+    
     <resource-ref>
         <res-ref-name>DBCon</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>

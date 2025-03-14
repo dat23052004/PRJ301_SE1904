@@ -8,10 +8,10 @@
                         <h3>Clothes Shop</h3>
                         <p>Điểm đến hàng đầu cho những bộ trang phục nam đa dạng và phong cách. Khám phá ngay để tìm kiếm sự hoàn hảo cho phong cách của bạn!</p>
                         <div class="footer_widget_contect">
-                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>  Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.</p>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> Khu Công nghệ cao Hòa Lạc, Km29 Đại lộ Thăng Long, huyện Thạch Thất, Hà Nội.</p>
 
-                            <p><i class="fa fa-mobile" aria-hidden="true"></i> 0(1234) 567 890</p>
-                            <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> clotheshop@gmail.com </a>
+                            <p><i class="fa fa-mobile" aria-hidden="true"></i> 0(345) 678 910J</p>
+                            <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> ddshop@gmail.com </a>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ import ddshop.dal.DBContext;
 import ddshop.model.Suppliers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,11 +19,26 @@ public class SupplierDAO extends DBContext {
 
     PreparedStatement stm;
     ResultSet rs;
-     
+
     private static final String GET_SUPPLIER_BY_ID = "select * from Suppliers where supplierid = ? ";
-    
+    private static final String GET_DATA = "select * from Suppliers ";
+
     public List<Suppliers> getData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Suppliers> data = new ArrayList<>();
+        try {
+            stm = connection.prepareStatement(GET_DATA);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String image = rs.getString(3);
+                Suppliers supplier = new Suppliers(id, name, image);
+                data.add(supplier);
+            }
+        } catch (Exception e) {
+            System.out.println("getTypes: " + e.getMessage());
+        }
+        return data;
     }
 
     Suppliers getSupplierById(int id) {

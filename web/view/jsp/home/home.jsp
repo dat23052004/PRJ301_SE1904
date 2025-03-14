@@ -5,10 +5,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Clothes - Shop</title>
+        <title>DD - Shop</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="view\assets\home\img\favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="view\assets\home\img\DDShop.jpeg">
 
         <!-- all css here -->
         <%@include file="../../common/web/add_css.jsp"%>
@@ -17,7 +17,7 @@
                 var email = document.getElementById('email-input-at-home').value;
                 var action = action;
                 $.ajax({
-                    url: "/PRJ301_Sp24_ClothesShop/EmailServlet",
+                    url: "/DDShop/EmailServlet",
                     type: "get",
                     data: {
                         email: email,
@@ -83,7 +83,7 @@
                                 </div>
                                 <!--categorie menu end-->
                                 
-                                
+                                    
                                 <c:if test="${sessionScope.WISHLIST != null}">
                                     <!--wishlist block start-->
                                     <div class="sidebar_widget wishlist mb-35" id="wishlist-small">

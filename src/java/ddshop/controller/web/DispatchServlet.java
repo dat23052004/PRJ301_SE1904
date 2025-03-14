@@ -82,18 +82,18 @@ public class DispatchServlet extends HttpServlet {
 
 //            List<Products> listProducts = productDAO.getData();
             List<Categorys> listCategories = categoryDAO.getData();
-//            List<Suppliers> listSuppliers = supplierDAO.getData();
+            List<Suppliers> listSuppliers = supplierDAO.getData();
             List<Products> listProductsNew = productDAO.getProductNew();
-//            List<Products> listProductsBestSeller = productDAO.getProductsBestSeller();
+            List<Products> listProductsBestSeller = productDAO.getProductsBestSeller();
             List<Types> listTypes = typeDAO.getAllTypes();
 
             
 //            request.setAttribute("LIST_PRODUCTS", listProducts);
             request.setAttribute("LIST_TYPES", listTypes);
             request.setAttribute("LIST_CATEGORIESS", listCategories);
-//            request.setAttribute("LIST_SUPPLIERS", listSuppliers);
+            request.setAttribute("LIST_SUPPLIERS", listSuppliers);
             request.setAttribute("LIST_PRODUCTS_NEW", listProductsNew);
-//            request.setAttribute("LIST_PRODUCTS_SELLER", listProductsBestSeller);
+            request.setAttribute("LIST_PRODUCTS_SELLER", listProductsBestSeller);
        
         } catch (Exception e) {
             log("DispatchServlet error:" + e.getMessage());
