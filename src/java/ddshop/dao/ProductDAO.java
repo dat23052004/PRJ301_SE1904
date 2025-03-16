@@ -5,6 +5,7 @@
 package ddshop.dao;
 
 import ddshop.dal.DBContext;
+import ddshop.model.CartItem;
 import ddshop.model.Categorys;
 import ddshop.model.Products;
 import ddshop.model.Suppliers;
@@ -28,6 +29,8 @@ public class ProductDAO extends DBContext {
 //    private static final String GET_PRODUCT_BY_COLOR = "select * From Products where colors like ?";
     private static final String GET_PRODUCTS_BY_SUPPLIER_ID = "SELECT * FROM Products WHERE supplierid = ? AND status = 1";
     private static final String GET_PRODUCTS_BY_ID = "SELECT * FROM Products WHERE id = ? AND status = 1";
+    private static final String UPDATE_QUANTITY_PRODUCT = "UPDATE Products SET [stock] = ? WHERE id = ?";
+    private static final String GET_STOCK = "SELECT stock AS Total FROM Products WHERE id = ?";
 
     public List<Products> getData() {
         List<Products> data = new ArrayList<>();
@@ -298,41 +301,31 @@ public class ProductDAO extends DBContext {
         return listRs;
     }
 
-    
+    public int getStock(int id) {
+        int result = 0;
+        try {
+            stm = connection.prepareStatement(GET_STOCK);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("Total");
+            }
+        } catch (Exception e) {
+            System.out.println("getProducts: " + e.getMessage());
+        }
+        return result;
+    }
+
+    public void updateQuantityProduct(CartItem cart) {
+        try {
+            stm = connection.prepareStatement(UPDATE_QUANTITY_PRODUCT);
+            stm.setInt(1, (cart.getProduct().getStock() - cart.getQuantity()));
+            stm.setInt(2, cart.getProduct().getId());
+            stm.executeQuery();
+        } catch (Exception e) {
+            System.out.println("getProducts: " + e.getMessage());
+        }
+
+    }
 
 }
-
-//    public Products getProductByColor(String color) {
-//        try {
-//            stm = connection.prepareStatement(GET_PRODUCT_BY_COLOR);
-//            stm.setString(9, "%" +color+"%");
-//            rs = stm.executeQuery();
-//            while (rs.next()) {
-//                CategoryDAO cDao = new CategoryDAO();
-//                SupplierDAO sDao = new SupplierDAO();
-//                TypeDAO tDao = new TypeDAO();
-//                Types type = tDao.getTypeById(rs.getInt("typeid"));
-//                Categorys category = cDao.getCategoryById(rs.getInt("categoryid"));
-//                Suppliers supplier = sDao.getSupplierById(rs.getInt("supplierid"));
-//                String name = rs.getString("productname");
-//                String description = rs.getString("description");
-//                int id = rs.getInt("id");
-//                int stock = rs.getInt("stock");
-//                int unitSold = rs.getInt("unitSold");
-//                double discount = rs.getDouble("discount");
-//                double price = rs.getDouble("price");
-//                boolean status = rs.getBoolean("status");
-//                Date date = rs.getDate("releasedate");
-//                String[] size = rs.getString("size").split(",");
-//                String[] color1 = rs.getString("colors").split(",");
-//                String[] image = rs.getString("images").split(" ");
-//
-//                Products product = new Products(id, stock, unitSold, name, description, image, color1, size, date, discount, price, status, category, supplier, type);
-//                return product;
-//            }
-//        } catch (Exception e) {
-//            System.out.println("getProduct: " + e.getMessage());
-//
-//        }
-//        return null;
-//    }

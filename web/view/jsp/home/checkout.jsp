@@ -80,44 +80,35 @@
 
                                                 <div class="col-lg-6 mb-30">
                                                     <label>First Name <span>*</span></label>
-                                                    <input type="text" value="${sessionScope.account != null ? sessionScope.account.firstName: ''}" readonly>    
+                                                    <input type="text" value="${sessionScope.account != null ? sessionScope.account.getFirstName(): ''}" readonly>    
                                                 </div>
                                                 <div class="col-lg-6 mb-30">
                                                     <label>Last Name  <span>*</span></label>
-                                                    <input type="text" value="${sessionScope.account != null ? sessionScope.account.lastName: ''}" readonly> 
+                                                    <input type="text" value="${sessionScope.account != null ? sessionScope.account.getLastName(): ''}" readonly> 
                                                 </div>
                                                 <div class="col-12 mb-30">
                                                     <label>Email</label>
-                                                    <input type="email" value="${sessionScope.account != null ? sessionScope.account.email: ''}"readonly>     
+                                                    <input type="email" value="${sessionScope.account != null ? sessionScope.account.getEmail(): ''}"readonly>     
                                                 </div>
                                                 <div class="col-12 mb-30">
                                                     <label>Address  <span>*</span></label>
-                                                    <input placeholder="House number and street name" type="text" value="${sessionScope.account != null ? sessionScope.account.address: ''}" readonly>     
+                                                    <input placeholder="House number and street name" type="text" value="${sessionScope.account != null ? sessionScope.account.getAddress(): ''}" readonly>     
                                                 </div>
                                                 <div class="col-lg-6 mb-30">
                                                     <label>Phone<span>*</span></label>
-                                                    <input type="number" value="${sessionScope.account != null ? sessionScope.account.phone: ''}" readonly> 
+                                                    <input type="number" value="${sessionScope.account != null ? sessionScope.account.getPhone(): ''}" readonly> 
 
                                                 </div> 
                                                 <div class="col-lg-6 mb-30">
                                                     <label> Email Address   <span>*</span></label>
-                                                    <input type="email" value="${sessionScope.account != null ? sessionScope.account.email: ''}" readonly> 
-
+                                                    <input type="email" value="${sessionScope.account != null ? sessionScope.account.getEmail(): ''}" readonly> 
                                                 </div> 
-                                                <!--                                                <div class="col-12">
-                                                                                                    <div class="order-notes">
-                                                                                                        <label for="order_note">Order Notes</label>
-                                                                                                        <textarea id="order_note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                                                                                    </div>    
-                                                                                                </div>   
-                                                -->
 
                                             </div>
                                         </form>    
                                     </div>
                                     <div class="col-lg-6 col-md-6" style="padding: 0 36px;">
                                         <c:if test="${sessionScope.CART != null && sessionScope.CART.size() > 0 }">
-
                                             <form action="CheckoutServlet" method="GET">    
                                                 <h3>Your order</h3> 
                                                 <div class="order_table table-responsive mb-30">
@@ -131,8 +122,8 @@
                                                         <tbody>
                                                             <c:forEach items="${sessionScope.CART}" var="c">
                                                                 <tr>
-                                                                    <td>${c.product.name}<strong> × ${c.quantity}</strong></td>
-                                                                    <td> ${c.product.getSalePrice() * c.quantity}đ</td>
+                                                                    <td>${c.getProduct().getName()}<strong> × ${c.getQuantity()}</strong></td>
+                                                                    <td> ${c.getProduct().getSalePrice() * c.getQuantity()}đ</td>
                                                                 </tr>
                                                             </c:forEach>
                                                         </tbody>
@@ -142,7 +133,7 @@
                                                                 <td>
                                                                     <c:set var="totalPrice" value="0" />
                                                                     <c:forEach items="${sessionScope.CART}" var="c">
-                                                                        <c:set var="productTotal" value="${c.product.getSalePrice() * c.quantity}" />
+                                                                        <c:set var="productTotal" value="${c.getProduct().getSalePrice() * c.getQuantity()}" />
                                                                         <c:set var="totalPrice" value="${totalPrice + productTotal}" />
                                                                     </c:forEach>
                                                                     ${totalPrice}đ
@@ -157,7 +148,7 @@
                                                                 <td><strong>
                                                                         <c:set var="totalPrice" value="0" />
                                                                         <c:forEach items="${sessionScope.CART}" var="c">
-                                                                            <c:set var="productTotal" value="${c.product.getSalePrice() * c.quantity}" />
+                                                                            <c:set var="productTotal" value="${c.getProduct().getSalePrice() * c.getQuantity()}" />
                                                                             <c:set var="totalPrice" value="${totalPrice + productTotal}" />
                                                                         </c:forEach>
                                                                         ${totalPrice}đ  
@@ -176,7 +167,7 @@
                                                     </c:forEach>
                                                 </div> 
                                                 <c:if test="${sessionScope.CART != null && sessionScope.CART.size() > 0}">
-                                                    <c:if test="${sessionScope.account != null && sessionScope.account.roleID == 2}">
+                                                    <c:if test="${sessionScope.account != null && sessionScope.account.getRole() == 2}">
                                                         <div class="order_button">
                                                             <button type="submit" >Checkout</button> 
                                                         </div>    

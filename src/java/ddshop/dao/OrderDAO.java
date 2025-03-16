@@ -22,11 +22,12 @@ public class OrderDAO extends DBContext {
 
     PreparedStatement stm;
     ResultSet rs;
-    
+
     private UserDAO uDao = new UserDAO();
     private PaymentDAO pDao = new PaymentDAO();
 
     private static final String GET_ORDER_BY_USERNAME = "SELECT * FROM Orders WHERE username = ?";
+    private static final String CREATE_ORDER = "insert into Orders(orderdate,totalprice,paymentid,username,status) values(?,?,?,?,0)";
 
     public List<Orders> getOrdersByUsername(String usename) {
         List<Orders> list = new ArrayList<>();
@@ -49,6 +50,21 @@ public class OrderDAO extends DBContext {
             System.out.println("getOrder: " + e.getMessage());
         }
         return list;
+    }
+
+    public boolean createNewOrder(String date, double total, Payments payment, Users user) {
+        try {
+            stm = connection.prepareStatement(CREATE_ORDER);
+            stm.setString(1, date);
+            stm.setDouble(2, total);
+            stm.setInt(3, payment.getPaymentID());
+            stm.setString(4, user.getUsername());
+            stm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println("getOrder: " + e.getMessage());
+        }
+        return false;
     }
 
 }
