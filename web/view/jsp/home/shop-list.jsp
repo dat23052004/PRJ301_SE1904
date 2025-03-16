@@ -15,6 +15,8 @@
         <%@include file="../../common/web/add_css.jsp"%>
     </head>
     <body>
+        ${LISTCATEGORIES.size()-1}
+        ${LISTPRODUCTS.size()}
         <!-- Add your site or application content here -->
 
         <!--pos page start-->
@@ -59,14 +61,16 @@
                                                 <label for="defaultcate">Tất cả
                                                 </label>
                                             </li>
-                                            <c:forEach begin="0" end="${LISTCATEGORIES.size()-1}" var="i">
-                                                <li>
-                                                    <input onclick="setCheck(this)" ${chid[i+1] == true?"checked":""}
-                                                           value="${cat.get(i).getId()}" id="${cat.get(i).getId()}" type="checkbox" name="id_filter">
-                                                    <label for="${cat.get(i).getId()}">${cat.get(i).getName()}
-                                                    </label>
-                                                </li>
-                                            </c:forEach>
+
+                                            <c:if test="${not empty LISTCATEGORIES}">
+                                                <c:forEach begin="0" end="${LISTCATEGORIES.size()-1}" var="i">
+                                                    <li>
+                                                        <input onclick="setCheck(this)" ${chid[i+1] == true ? "checked" : ""}
+                                                               value="${cat.get(i).getId()}" id="${cat.get(i).getId()}" type="checkbox" name="id_filter">
+                                                        <label for="${cat.get(i).getId()}">${cat.get(i).getName()}</label>
+                                                    </li>
+                                                </c:forEach>
+                                            </c:if>
                                             <input type="hidden" name="btnAction" value="${filterByCategory}" id="actionfilter">
                                         </ul>
                                     </div>
@@ -160,6 +164,9 @@
                                    border-radius: 20px;
                                    margin: 10px 0 20px"
                                    type="reset">Reset</a>
+                                                
+                                                
+                                                
                                 <!--wishlist start-->
                                 <c:if test="${sessionScope.account !=null || sessionScope.WISHLIST != null}">
                                     <!--wishlist block start-->
@@ -414,12 +421,6 @@
 
         <!--footer area start-->
         <%@include file="../../common/web/footer.jsp"%>
-        <!--footer area end-->
-
-        <!-- modal area start --> 
-        <!-- modal area end --> 
-
-        <!-- all js here -->
         <%@include file="../../common/web/add_js.jsp"%>
     </body>
 </html>

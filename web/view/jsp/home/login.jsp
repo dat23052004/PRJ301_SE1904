@@ -16,7 +16,8 @@
     </head>
     <body>
         <!-- Add your site or application content here -->
-
+        ${ERROR}
+        ${SUCCESS}
         <!--pos page start-->
         <div class="pos_page">
             <div class="container"> 
@@ -69,7 +70,7 @@
                                             </label>
                                         </div>
                                         <div style="margin-top: 20px">
-                                            <a class="login-with-google-btn" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/PRJ301_Sp24_ClothesShop/LoginServlet&response_type=code
+                                            <a class="login-with-google-btn" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/DDShop/LoginServlet&response_type=code
                                                &client_id=40613383185-c4qs0q74c4g95fg8l8lr34q9765bpaet.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>
                                             <a href="ForgotPasswordServlet?status=forgot" style="margin-left: 20px">Forgot password</a>
                                         </div>
@@ -89,17 +90,17 @@
                                         <div style="display: flex; justify-content: space-between">
                                             <p style="width: 45%">   
                                                 <label>First Name</label>
-                                                <input name="firstname" ${requestScope.firstNameGoogleAccount != null ? readonly : ""} value="${requestScope.firstNameGoogleAccount != null ? requestScope.firstNameGoogleAccount : ""}" type="text" required>
+                                                <input name="firstname" value="" type="text" required>
                                             </p>
                                             <p style="width: 45%">
                                                 <label>Last Name</label>
-                                                <input name="lastname" ${requestScope.firstNameGoogleAccount != null ? readonly : ""} value="${requestScope.lastNameGoogleAccount != null ? requestScope.lastNameGoogleAccount : ""}" type="text" required>
+                                                <input name="lastname" value="" type="text" required>
                                             </p>
                                         </div>
                                         <p>   
                                             <label>Username</label>
-                                            <input oninput="checkDuplicate(this)" name="username" type="text" required/>
-                                            <h5 style="color: red" id="errorduplicate"></h5>
+                                            <input name="username" type="text" required/>
+                                        <h5 style="color: red" id="errorduplicate"></h5>
                                         </p>
                                         <input type="hidden" name="avatar" value="${requestScope.avatar}"/>
                                         <p style="position: relative">   

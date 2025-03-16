@@ -6,22 +6,6 @@
     <div class="header_top">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6">
-                <!--                <div class="switcher">
-                                    <ul>
-                                        <li class="languages"><a href="#"><img src="assets\img\logo\fontlogo.jpg" alt=""> English <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown_languages">
-                                                <li><a href="#"><img src="assets\img\logo\fontlogo.jpg" alt=""> English</a></li>         
-                                            </ul>   
-                                        </li> 
-                
-                                        <li class="currency"><a href="#"> Currency : $ <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown_currency">
-                                                <li><a href="#"> Dollar (USD)</a></li>
-                                                <li><a href="#"> Euro (EUR)  </a></li>
-                                            </ul> 
-                                        </li> 
-                                    </ul>
-                                </div>-->
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="header_links">
@@ -36,7 +20,7 @@
                             <li><a href="DispatchServlet?btnAction=Login" title="Login">Login</a></li>  
                             </c:if>
                             <c:if test="${sessionScope.account != null}">
-                            <li><a href="${sessionScope.account.roleID == 1 ? 'AdminServlet' : 'ProfileServlet'} ">Hello, ${sessionScope.account.firstName} ${sessionScope.account.lastName}!</a></li>
+                            <li><a href="${sessionScope.account.role == 1 ? 'AdminServlet' : 'ProfileServlet'} ">Hello, ${sessionScope.account.getFirstName()} ${sessionScope.account.getLastName()}!</a></li>
                             <li><a href="DispatchServlet?btnAction=Logout">Logout</a></li>
                             </c:if>
                     </ul>

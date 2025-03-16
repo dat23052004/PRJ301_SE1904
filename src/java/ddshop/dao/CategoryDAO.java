@@ -62,5 +62,13 @@ public class CategoryDAO extends DBContext {
         }
         return null; 
     }
-
+    public static void main(String[] args) {
+        List<Categorys> list = (new CategoryDAO()).getData();
+        if(list == null || list.size()==0){
+            System.out.println("hihi");
+        }else{
+            System.out.println(list.size()-1);
+        }
+        
+    }
 }

@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="footer_widget">
-                        <h3>Clothes Shop</h3>
+                        <h3>DD Shop</h3>
                         <p>Điểm đến hàng đầu cho những bộ trang phục nam đa dạng và phong cách. Khám phá ngay để tìm kiếm sự hoàn hảo cho phong cách của bạn!</p>
                         <div class="footer_widget_contect">
                             <p><i class="fa fa-map-marker" aria-hidden="true"></i> Khu Công nghệ cao Hòa Lạc, Km29 Đại lộ Thăng Long, huyện Thạch Thất, Hà Nội.</p>

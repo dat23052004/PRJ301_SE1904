@@ -43,21 +43,21 @@ public class DispatchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
+//        response.setCharacterEncoding("UTF-8");
         String url = WELCOME;
         try {
             String btnString = request.getParameter("btnAction");
             HttpSession session = request.getSession();
             if (btnString == null) {
                 getDataHomeLSP(request, response);
-                request.setAttribute("CURRENTSERVLET", "Home");
+//                request.setAttribute("CURRENTSERVLET", "Home");
             } else if (btnString.equals(LOGOUT)) {
                 url = WELCOME;
                 getDataHomeLSP(request, response);
                 if (session.getAttribute("account") != null) {
                     session.removeAttribute("account");
                 }
-                request.setAttribute("CURRENTSERVLET", "Home");
+//                request.setAttribute("CURRENTSERVLET", "Home");
             } else if (btnString.equals(LOGIN)) {
                 url = LOGIN_CONTROLlER;
             } else if (btnString.equals(REGISTER)) {
@@ -80,7 +80,7 @@ public class DispatchServlet extends HttpServlet {
             SupplierDAO supplierDAO = new SupplierDAO();
             TypeDAO typeDAO = new TypeDAO();
 
-//            List<Products> listProducts = productDAO.getData();
+            List<Products> listProducts = productDAO.getData();
             List<Categorys> listCategories = categoryDAO.getData();
             List<Suppliers> listSuppliers = supplierDAO.getData();
             List<Products> listProductsNew = productDAO.getProductNew();
@@ -88,7 +88,7 @@ public class DispatchServlet extends HttpServlet {
             List<Types> listTypes = typeDAO.getAllTypes();
 
             
-//            request.setAttribute("LIST_PRODUCTS", listProducts);
+            request.setAttribute("LIST_PRODUCTS", listProducts);
             request.setAttribute("LIST_TYPES", listTypes);
             request.setAttribute("LIST_CATEGORIESS", listCategories);
             request.setAttribute("LIST_SUPPLIERS", listSuppliers);

@@ -22,18 +22,48 @@ public class ProductDAO extends DBContext {
     PreparedStatement stm;
     ResultSet rs;
 
+    private static final String GET_DATA = "SELECT * FROM Products WHERE status = 1";
     private static final String GET_PRODUCTS_NEW_BY_YEAR = "SELECT * from Products WHERE year(releasedate) = 2024 AND status = 1";
     private static final String GET_PRODUCTS_BEST_SELLER = "select top(5) * from Products where status=1 order by unitSold desc";
 //    private static final String GET_PRODUCT_BY_COLOR = "select * From Products where colors like ?";
     private static final String GET_PRODUCTS_BY_SUPPLIER_ID = "SELECT * FROM Products WHERE supplierid = ? AND status = 1";
 
     public List<Products> getData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Products> data = new ArrayList<>();
+        try {
+            stm = connection.prepareStatement(GET_DATA);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                CategoryDAO cDao = new CategoryDAO();
+                SupplierDAO sDao = new SupplierDAO();
+                TypeDAO tDao = new TypeDAO();
+                Types type = tDao.getTypeById(rs.getInt("typeid"));
+                Categorys category = cDao.getCategoryById(rs.getInt("categoryid"));
+                Suppliers supplier = sDao.getSupplierById(rs.getInt("supplierid"));
+                String name = rs.getString("productname");
+                String description = rs.getString("description");
+                int id = rs.getInt("id");
+                int stock = rs.getInt("stock");
+                int unitSold = rs.getInt("unitSold");
+                double discount = rs.getDouble("discount");
+                double price = rs.getDouble("price");
+                boolean status = rs.getBoolean("status");
+                Date date = rs.getDate("releasedate");
+                String[] size = rs.getString("size").split(",");
+                String[] color = rs.getString("colors").split(",");
+                String[] image = rs.getString("images").split(" ");
+
+                Products product = new Products(id, stock, unitSold, name, description, image, color, size, date, discount, price, status, category, supplier, type);
+                data.add(product);
+            }
+        } catch (Exception e) {
+            System.out.println("getProducts: " + e.getMessage());
+        }
+        return data;
     }
 
     public List<Products> getProductNew() throws SQLException {
         List<Products> data = new ArrayList<>();
-
         try {
             stm = connection.prepareStatement(GET_PRODUCTS_NEW_BY_YEAR);
             rs = stm.executeQuery();
@@ -105,10 +135,10 @@ public class ProductDAO extends DBContext {
         List<Products> list = new ArrayList<>();
 
         if (mult_id_filter[0] == 0) {
-            return list;
+            return pList;
         }
 
-        for (Products product : list) {
+        for (Products product : pList) {
             for (int i = 0; i < mult_id_filter.length; i++) {
                 if (product.getCategory().getId() == mult_id_filter[i]) {
                     list.add(product);
@@ -215,6 +245,11 @@ public class ProductDAO extends DBContext {
             arr.add(pList.get(i));
         }
         return arr;
+    }
+    
+    public static void main(String[] args) {
+        List<Products> list  =(new ProductDAO()).getData();
+        System.out.println(list.size());
     }
 
 }

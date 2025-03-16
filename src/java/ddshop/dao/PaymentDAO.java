@@ -4,10 +4,18 @@
  */
 package ddshop.dao;
 
+import ddshop.model.Payments;
+
 /**
  *
  * @author MY PC
  */
 public class PaymentDAO {
+
+    Payments getPaymentById(int paymentId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
     
 }

@@ -52,9 +52,9 @@
                                     <!-- Nav tabs -->
                                     <div class="dashboard_tab_button">
                                         <ul role="tablist" class="nav flex-column dashboard-list">
-                                            <li style="margin-bottom: 20px"><img style="border: 5px solid #00BBA6; height: 255px" src="${sessionScope.account.avatar}" width="100%"></li>
+                                            <li style="margin-bottom: 20px"><img style="border: 5px solid #00BBA6; height: 255px" src="${sessionScope.account.getAvatar()}" width="100%"></li>
                                             <li><a href="#account-details" data-toggle="tab" class="nav-link active">Account details</a></li>
-                                                <c:if test="${sessionScope.account != null && sessionScope.account.roleID == 2}">
+                                                <c:if test="${sessionScope.account != null && sessionScope.account.getRole() == 2}">
                                                 <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
                                                 </c:if>
 
@@ -78,15 +78,17 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <c:forEach items="${requestScope.LISTORDERS}" var="o">
-                                                            <tr>
-                                                                <td>${o.orderID}</td>
-                                                                <td>${o.orderDate}</td>
-                                                                <td><span class="success">${o.status == true ? "Đã giao" : "Chưa giao"}</span></td>
-                                                                <td>${o.totalPrice}</td>
-                                                                <td><a href="cart.html" class="view">view</a></td>
-                                                            </tr>
-                                                        </c:forEach>
+                                                        <c:if test="${requestScope.LISTORDERS!= null && !requestScope.LISTORDERS.isEmpty()}">
+                                                            <c:forEach items="${requestScope.LISTORDERS}" var="o">
+                                                                <tr>
+                                                                    <td>${o.orderID}</td>
+                                                                    <td>${o.orderDate}</td>
+                                                                    <td><span class="success">${o.status == true ? "Đã giao" : "Chưa giao"}</span></td>
+                                                                    <td>${o.totalPrice}</td>
+                                                                    <td><a href="cart.html" class="view">view</a></td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </c:if>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -101,20 +103,20 @@
                                                     <div class="account_login_form">
                                                         <form id="form-1"action="EditProfileServlet" method="get">
                                                             <label>Username</label>
-                                                            <input class="input_type " type="text" name="username" value="${sessionScope.account.userName}" readonly>
+                                                            <input class="input_type " type="text" name="username" value="${sessionScope.account.getUsername()}" readonly>
                                                             <label>Role</label>
-                                                            <input class="input_type " type="text" name="role" value="${sessionScope.account.roleID == 1? "Admin" : "Customer"}" readonly>
+                                                            <input class="input_type " type="text" name="role" value="${sessionScope.account.getRole() == 1? "Admin" : "Customer"}" readonly>
                                                             <label>First Name</label>
-                                                            <input class="input_type " type="text" name="first-name" value="${sessionScope.account.firstName}" readonly>
+                                                            <input class="input_type " type="text" name="first-name" value="${sessionScope.account.getFirstName()}" readonly>
                                                             <label>Last Name</label>
-                                                            <input class="input_type " type="text" name="last-name" value="${sessionScope.account.lastName}" readonly>
+                                                            <input class="input_type " type="text" name="last-name" value="${sessionScope.account.getLastName()}" readonly>
                                                             <label>Email</label>
-                                                            <input class="input_type " type="text" name="email" value="${sessionScope.account.email}" readonly>
-                                                            <input class="input_type " type="hidden" name="avatar" value="${sessionScope.account.avatar}" readonly>
+                                                            <input class="input_type " type="text" name="email" value="${sessionScope.account.getEmail()}" readonly>                                                                                                               
+                                                            <input class="input_type " type="hidden" name="avatar" value="${sessionScope.account.getAvatar()}" readonly>
                                                             <label>Address</label>
-                                                            <input class="input_type " type="text" name="address" value="${sessionScope.account.address}" readonly>
+                                                            <input class="input_type " type="text" name="address" value="${sessionScope.account.getAddress()}" readonly>
                                                             <label>Phone</label>
-                                                            <input class="input_type input_read" type="text" value="${sessionScope.account.phone}" name="phone" readonly>
+                                                            <input class="input_type input_read" type="text" value="${sessionScope.account.getPhone()}" name="phone" readonly>
                                                             <div class="save_button primary_btn default_button">
                                                                 <button onclick="changeType(this)" id="edit" type="button">Edit</button>
                                                             </div>

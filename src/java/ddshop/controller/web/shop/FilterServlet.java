@@ -35,8 +35,8 @@ public class FilterServlet extends HttpServlet {
         try {
             ProductDAO pDao = new ProductDAO();
             CategoryDAO cDao = new CategoryDAO();
-            List<Products> pList = new ArrayList<>();
-            List<Categorys> cList = new ArrayList<>();
+            List<Products> pList = pDao.getData();
+            List<Categorys> cList = cDao.getData();
 
             String group = request.getParameter("sort_group"); // url SORT
             String action = request.getParameter("btnAction");
@@ -47,7 +47,13 @@ public class FilterServlet extends HttpServlet {
             int id_filter = 0; // danh mục 
             String queryString = request.getQueryString();
 
+            if (action == null) {
+                action = group;
+            }
+
+            //CategoryId 
             if (id_filter_raw != null) {
+                id_filter = Integer.parseInt(id_filter_raw);
                 if ("filterByCategory".equals(action)) {
                     if (mult_id_filter_raw != null) {
                         mult_id_filter = new int[mult_id_filter_raw.length];
@@ -90,7 +96,7 @@ public class FilterServlet extends HttpServlet {
                 }
                 url = SORT;
             }
-
+            
             // Price
             String priceFrom_raw = request.getParameter("pricefrom");
             String priceTo_raw = request.getParameter("priceto");

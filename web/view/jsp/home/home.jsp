@@ -12,30 +12,9 @@
 
         <!-- all css here -->
         <%@include file="../../common/web/add_css.jsp"%>
-        <script>
-            function subscribeEmailAtHome(action) {
-                var email = document.getElementById('email-input-at-home').value;
-                var action = action;
-                $.ajax({
-                    url: "/DDShop/EmailServlet",
-                    type: "get",
-                    data: {
-                        email: email,
-                        action: action
-                    },
-                    success: function (data) {
-                        var row = document.getElementById("newsletter-div");
-                        row.innerHTML = data;
-                    },
-                    error: function (xhr) {
-                    }
-                });
-            }</script>
-
     </head>
     <body>
         <!-- Add your site or application content here -->
-
         <!--pos page start-->
         <div class="pos_page">
             <div class="container">
@@ -82,8 +61,8 @@
                                     </ul>
                                 </div>
                                 <!--categorie menu end-->
-                                
-                                    
+
+
                                 <c:if test="${sessionScope.WISHLIST != null}">
                                     <!--wishlist block start-->
                                     <div class="sidebar_widget wishlist mb-35" id="wishlist-small">
@@ -100,9 +79,6 @@
                                                         <a href="SingleProductServlet?product_id=${p.id}">${p.name}</a>
                                                         <span class="cart_price">$${p.salePrice}</span>
                                                     </div>
-                                                    <!--                                                    <div class="cart_remove">
-                                                                                                            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
-                                                                                                        </div>-->
                                                 </div>
                                             </c:if>
                                         </c:forEach>
@@ -113,6 +89,7 @@
                                     </div>
                                     <!--wishlist block end-->
                                 </c:if>
+                                    
                                 <c:if test="${sessionScope.account == null}">
                                     <!--newsletter block start-->
                                     <div class="sidebar_widget newsletter mb-35" id="newsletter-div">
@@ -136,6 +113,7 @@
                                     <!--newsletter block end--> 
                                 </c:if>
 
+                                    
                                 <!--sidebar banner-->
                                 <div class="sidebar_widget bottom ">
                                     <div class="banner_img">

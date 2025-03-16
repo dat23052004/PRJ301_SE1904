@@ -218,25 +218,6 @@ function deleteProductFromCartPage(action, product_id, curPage) {
     });
 }
 
-function checkDuplicate(input) {
-    var username = input.value;
-    console.log(username);
-    $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/RegisterServlet",
-        type: "post",
-        data: {
-            username: username,
-            action: "CheckDuplicate"
-        },
-        success: function (data) {
-            var row = document.getElementById("errorduplicate");
-            row.innerHTML = data;
-        },
-        error: function (xhr) {
-        }
-    });
-}
-
 function subscribeEmailAtHome(action) {
     var email = document.getElementById('email-input-at-home').value;
     var action = action;

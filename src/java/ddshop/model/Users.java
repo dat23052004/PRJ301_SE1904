@@ -10,20 +10,20 @@ package ddshop.model;
  */
 public class Users {
     int id;
-    String firsName, lastName, email, avatar, usename, password, address, phone;
+    String firstName, lastName, email, avatar, username, password, address, phone;
     int role;
     boolean status;
 
     public Users() {
     }
 
-    public Users(int id, String firsName, String lastName, String email, String avatar, String usename, String password, String address, String phone, int role, boolean status) {
+    public Users(int id, String firstName, String lastName, String email, String avatar, String username, String password, String address, String phone, int role, boolean status) {
         this.id = id;
-        this.firsName = firsName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.avatar = avatar;
-        this.usename = usename;
+        this.username = username;
         this.password = password;
         this.address = address;
         this.phone = phone;
@@ -39,12 +39,12 @@ public class Users {
         this.id = id;
     }
 
-    public String getFirsName() {
-        return firsName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirsName(String firsName) {
-        this.firsName = firsName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -71,12 +71,12 @@ public class Users {
         this.avatar = avatar;
     }
 
-    public String getUsename() {
-        return usename;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsename(String usename) {
-        this.usename = usename;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -118,5 +118,7 @@ public class Users {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    
     
 }
