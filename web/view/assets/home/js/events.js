@@ -52,7 +52,7 @@ function sortProducts(event) {
     var text = event.target.value;
     document.getElementById("sortinput").value = text;
     $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/ShopServlet",
+        url: "/DDShop/ShopServlet",
         type: "get",
         data: {
             valueSort: text
@@ -70,7 +70,7 @@ function searchProducts(tag, scope) {
     var text = tag.value;
     var scope = scope;
     $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/SearchServlet",
+        url: "/DDShop/SearchServlet",
         type: "get",
         data: {
             txtSearch: text,
@@ -90,7 +90,7 @@ function addProductToCart(action, product_id, quantity) {
     var productId = product_id;
     var sl = quantity;
     $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/CartServlet",
+        url: "/DDShop/CartServlet",
         type: "get",
         data: {
             action: action,
@@ -105,24 +105,7 @@ function addProductToCart(action, product_id, quantity) {
         }
     });
 }
-function addProductToWishlist(action, product_id) {
-    var action = action;
-    var productId = product_id;
-    $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/WishlistServlet",
-        type: "get",
-        data: {
-            action: action,
-            product_id: productId,
-        },
-        success: function (data) {
-            var row = document.getElementById("wishlist-small");
-            row.innerHTML = data;
-        },
-        error: function (xhr) {
-        }
-    });
-}
+
 function addProductFromSingle(action, product_id, stock) {
     var action = action;
     var productId = product_id;
@@ -133,7 +116,7 @@ function addProductFromSingle(action, product_id, stock) {
         return;
     }
     $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/CartServlet",
+        url: "/DDShop/CartServlet",
         type: "get",
         data: {
             action: action,
@@ -161,7 +144,7 @@ function updateProductCart(action, product_id, stock) {
         return;
     }
     $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/CartServlet",
+        url: "/DDShop/CartServlet",
         type: "get",
         data: {
             action: action,
@@ -182,7 +165,7 @@ function deleteProducOnICon(action, product_id, curPage) {
     var productId = product_id;
     var curPage = curPage;
     $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/CartServlet",
+        url: "/DDShop/CartServlet",
         type: "get",
         data: {
             action: action,
@@ -202,7 +185,7 @@ function deleteProductFromCartPage(action, product_id, curPage) {
     var productId = product_id;
     var curPage = curPage;
     $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/CartServlet",
+        url: "/DDShop/CartServlet",
         type: "get",
         data: {
             action: action,
@@ -218,24 +201,7 @@ function deleteProductFromCartPage(action, product_id, curPage) {
     });
 }
 
-function subscribeEmailAtHome(action) {
-    var email = document.getElementById('email-input-at-home').value;
-    var action = action;
-    $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/EmailServlet",
-        type: "get",
-        data: {
-            email: email,
-            action: action
-        },
-        success: function (data) {
-            var row = document.getElementById("newsletter-div");
-            row.innerHTML = data;
-        },
-        error: function (xhr) {
-        }
-    });
-}
+
 
 function getColor(element) {
     var inputColor = document.getElementById('chooseColor');
@@ -288,3 +254,41 @@ function setCheck(obj) {
     document.getElementById('actionfilter').value = 'filterByCategory';
     document.getElementById('form-filter').submit();
 }
+
+//function subscribeEmailAtHome(action) {
+//    var email = document.getElementById('email-input-at-home').value;
+//    var action = action;
+//    $.ajax({
+//        url: "/DDShop/EmailServlet",
+//        type: "get",
+//        data: {
+//            email: email,
+//            action: action
+//        },
+//        success: function (data) {
+//            var row = document.getElementById("newsletter-div");
+//            row.innerHTML = data;
+//        },
+//        error: function (xhr) {
+//        }
+//    });
+//}
+
+//function addProductToWishlist(action, product_id) {
+//    var action = action;
+//    var productId = product_id;
+//    $.ajax({
+//        url: "/DDShop/WishlistServlet",
+//        type: "get",
+//        data: {
+//            action: action,
+//            product_id: productId,
+//        },
+//        success: function (data) {
+//            var row = document.getElementById("wishlist-small");
+//            row.innerHTML = data;
+//        },
+//        error: function (xhr) {
+//        }
+//    });
+//}

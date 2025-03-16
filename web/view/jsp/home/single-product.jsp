@@ -35,26 +35,24 @@
                                         <li><i class="fa fa-angle-right"></i></li>
                                         <li>single product</li>
                                     </ul>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--breadcrumbs area end-->
 
 
                     <!--product wrapper start-->
                     <div class="product_details">
                         <c:if test="${requestScope.PRODUCT != null}" >
                             <form action="CartServlet" method="GET">
-                                <input type="hidden" name="product_id" value="${PRODUCT.id}">
+                                <input type="hidden" name="product_id" value="${PRODUCT.getId()}">
                                 <input type="hidden" name="action" value="Add">
                                 <div class="row">
                                     <div class="col-lg-5 col-md-6">
                                         <div class="product_tab fix"> 
                                             <div class="product_tab_button">    
                                                 <ul class="nav" role="tablist">
-                                                    <c:forEach items="${PRODUCT.images}" var="img" varStatus="loop">
+                                                    <c:forEach items="${PRODUCT.getImages()}" var="img" varStatus="loop">
                                                         <c:if test="${loop.index < 2}">
                                                             <li>
                                                                 <img src="${img}" alt="photo-product">
@@ -64,7 +62,7 @@
                                                 </ul>
                                             </div> 
                                             <div class="tab-content produc_tab_c">
-                                                <c:forEach items="${PRODUCT.images}" var="img" varStatus="loop">
+                                                <c:forEach items="${PRODUCT.getImages()}" var="img" varStatus="loop">
                                                     <div class="tab-pane fade show active" id="p_tab1" role="tabpanel">
                                                         <div class="modal_img">
                                                             <a href="#"><img style="margin-bottom: 10px; border: 1px solid #00BBA6" src="${img}" alt=""></a>
@@ -85,33 +83,33 @@
                                     </div>
                                     <div class="col-lg-7 col-md-6">
                                         <div class="product_d_right">
-                                            <h1>${PRODUCT.name}</h1>
+                                            <h1>${PRODUCT.getName()}</h1>
                                             <div class="product_ratting mb-10">
                                             </div>
                                             <div class="product_desc">
-                                                <p>${PRODUCT.description}</p>
+                                                <p>${PRODUCT.getDescription()}</p>
                                             </div>
 
                                             <div class="content_price mb-15">
                                                 <span>${PRODUCT.getSalePrice()}&#273;</span>
-                                                <span class="old-price">$${PRODUCT.price}&#273;</span>
+                                                <span class="old-price">$${PRODUCT.getPrice()}&#273;</span>
                                                 <h6 id="error-stock" style="color: red"></h6>
                                             </div>
                                             <div class="box_quantity mb-20">
                                                 <form action="#">
                                                     <label>Số lượng</label>
-                                                    <input id="input-quantity" min="1" max="${PRODUCT.stock}" value="1" type="number" name="quantity">
+                                                    <input id="input-quantity" min="1" max="${PRODUCT.getStock()}" value="1" type="number" name="quantity">
                                                 </form>
-                                                <button type="button" onclick="addProductFromSingle('Add',${PRODUCT.id}, ${PRODUCT.stock})">
+                                                <button type="button" onclick="addProductFromSingle('Add',${PRODUCT.getId()}, ${PRODUCT.getStock()})">
                                                     <i class="fa fa-shopping-cart"></i> thêm vào giỏ
                                                 </button>
-                                                <button type="button" onclick="addProductToWishlist('Add',${PRODUCT.id})"><i class="fa fa-heart" aria-hidden="true"></i></button>    
+                                                <button type="button" onclick="addProductToWishlist('Add',${PRODUCT.getId()})"><i class="fa fa-heart" aria-hidden="true"></i></button>    
                                             </div>
                                             <div class="sidebar_widget color">
                                                 <h2>size</h2>
                                                 <div class="widget_color">
                                                     <ul>
-                                                        <c:forEach items="${PRODUCT.size}" var="s" varStatus="loop">
+                                                        <c:forEach items="${PRODUCT.getSizes()}" var="s" varStatus="loop">
                                                             <li><button type="button">${s}</button></li>
                                                             </c:forEach>
                                                     </ul>
@@ -122,7 +120,7 @@
                                                 <h2>màu</h2>
                                                 <div class="widget_color">
                                                     <ul>
-                                                        <c:forEach items="${PRODUCT.colors}" var="s" varStatus="loop">
+                                                        <c:forEach items="${PRODUCT.getColors()}" var="s" varStatus="loop">
                                                             <li><button type="button">${s}</button></li>
                                                             </c:forEach>
                                                     </ul>
@@ -130,7 +128,7 @@
                                             </div>                 
 
                                             <div class="product_stock mb-20">
-                                                <p>${PRODUCT.stock} sản phẩm</p>
+                                                <p>${PRODUCT.getStock()} sản phẩm</p>
                                                 <span> In stock </span>
                                             </div>
                                         </div>
@@ -155,7 +153,7 @@
                                 <div class="col-lg-3">
                                     <div class="single_product">
                                         <div class="product_thumb">
-                                            <a href="SingleProductServlet?product_id=${p.id}"><img src="${p.images[0]}" alt=""></a> 
+                                            <a href="SingleProductServlet?product_id=${p.getId()}"><img src="${p.images[0]}" alt=""></a> 
                                             <div class="img_icone">
                                                 <img src="view\assets\home\img\cart\span-new.png" alt="">
                                             </div>
@@ -166,31 +164,31 @@
                                                         font-size: 13px;
                                                         padding: 2px 11px;
                                                         font-weight: 600;"
-                                                        onclick="addProductToCart('Add',${p.id}, 1)"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
+                                                        onclick="addProductToCart('Add',${p.getId()}, 1)"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
                                             </div>
 
                                         </div>
                                         <div class="product_content">
                                             <div style="display: flex; justify-content: center">
-                                                <c:if test="${p.price != p.salePrice}">
-                                                    <span style="margin-right: 10px; font-weight: 400;" class="old_price" id="oldprice">Rs. ${p.price}&#273;</span>
+                                                <c:if test="${p.getPrice() != p.getSalePrice()}">
+                                                    <span style="margin-right: 10px; font-weight: 400;" class="old_price" id="oldprice">Rs. ${p.getPrice()}&#273;</span>
                                                 </c:if>
                                                 <span class="current_price">Rs. ${p.getSalePrice()}&#273;
                                                 </span>
                                             </div>
-                                            <h3 class="product_title"><a href="SingleProductServlet?product_id=${p.id}">${p.name}</a></h3>
+                                            <h3 class="product_title"><a href="SingleProductServlet?product_id=${p.getId()}">${p.getName()}</a></h3>
 
                                         </div>
                                         <div class="product_info">
                                             <ul>
-                                                <!--<li><a href="WishlistServlet?action=Add&product_id=${p.id}" title=" Add to Wishlist ">Yêu thích</a></li>-->
+                                                <!--<li><a href="WishlistServlet?action=Add&product_id=${p.getId()}" title=" Add to Wishlist ">Yêu thích</a></li>-->
                                                 <li><button style="color: red;
                                                             border: none;
                                                             border-radius: 4px;
                                                             font-size: 13px;
                                                             padding: 2px 11px;
-                                                            font-weight: 600;" onclick="addProductToWishlist('Add',${p.id})">Yêu thích</button></li>
-                                                <li><a href="SingleProductServlet?product_id=${p.id}" title="View Detail">Xem sản phẩm</a></li>
+                                                            font-weight: 600;" onclick="addProductToWishlist('Add',${p.getId()})">Yêu thích</button></li>
+                                                <li><a href="SingleProductServlet?product_id=${p.getId()}" title="View Detail">Xem sản phẩm</a></li>
                                             </ul>
                                         </div>
                                     </div>

@@ -27,6 +27,7 @@ public class ProductDAO extends DBContext {
     private static final String GET_PRODUCTS_BEST_SELLER = "select top(5) * from Products where status=1 order by unitSold desc";
 //    private static final String GET_PRODUCT_BY_COLOR = "select * From Products where colors like ?";
     private static final String GET_PRODUCTS_BY_SUPPLIER_ID = "SELECT * FROM Products WHERE supplierid = ? AND status = 1";
+    private static final String GET_PRODUCTS_BY_ID = "SELECT * FROM Products WHERE id = ? AND status = 1";
 
     public List<Products> getData() {
         List<Products> data = new ArrayList<>();
@@ -246,11 +247,58 @@ public class ProductDAO extends DBContext {
         }
         return arr;
     }
-    
+
     public static void main(String[] args) {
-        List<Products> list  =(new ProductDAO()).getData();
+        List<Products> list = (new ProductDAO()).getData();
         System.out.println(list.size());
     }
+
+    public Products getProductById(int product_id) {
+        Products product = null;
+        try {
+            stm = connection.prepareStatement(GET_PRODUCTS_BY_ID);
+            stm.setInt(1, product_id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                CategoryDAO cDao = new CategoryDAO();
+                SupplierDAO sDao = new SupplierDAO();
+                TypeDAO tDao = new TypeDAO();
+                Types type = tDao.getTypeById(rs.getInt("typeid"));
+                Categorys category = cDao.getCategoryById(rs.getInt("categoryid"));
+                Suppliers supplier = sDao.getSupplierById(rs.getInt("supplierid"));
+                String name = rs.getString("productname");
+                String description = rs.getString("description");
+                int stock = rs.getInt("stock");
+                int unitSold = rs.getInt("unitSold");
+                double discount = rs.getDouble("discount");
+                double price = rs.getDouble("price");
+                boolean status = rs.getBoolean("status");
+                Date date = rs.getDate("releasedate");
+                String[] size = rs.getString("size").split(",");
+                String[] color = rs.getString("colors").split(",");
+                String[] image = rs.getString("images").split(" ");
+
+                product = new Products(product_id, stock, unitSold, name, description, image, color, size, date, discount, price, status, category, supplier, type);
+            }
+        } catch (Exception e) {
+        }
+        return product;
+    }
+
+    public List<Products> getProductByCategoryId(List<Products> data, int id) {
+        List<Products> listRs = new ArrayList<>();
+        if (id == 0) {
+            return data;
+        }
+        for (Products p : data) {
+            if (p.getCategory().getId() == id) {
+                listRs.add(p);
+            }
+        }
+        return listRs;
+    }
+
+    
 
 }
 

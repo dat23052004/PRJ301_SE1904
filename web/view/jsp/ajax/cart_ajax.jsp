@@ -1,9 +1,3 @@
-<%-- 
-    Document   : cart_ajax
-    Created on : Mar 1, 2024, 9:50:28 AM
-    Author     : lvhho
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

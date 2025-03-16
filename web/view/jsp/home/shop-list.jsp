@@ -15,8 +15,6 @@
         <%@include file="../../common/web/add_css.jsp"%>
     </head>
     <body>
-        ${LISTCATEGORIES.size()-1}
-        ${LISTPRODUCTS.size()}
         <!-- Add your site or application content here -->
 
         <!--pos page start-->
@@ -164,9 +162,9 @@
                                    border-radius: 20px;
                                    margin: 10px 0 20px"
                                    type="reset">Reset</a>
-                                                
-                                                
-                                                
+
+
+
                                 <!--wishlist start-->
                                 <c:if test="${sessionScope.account !=null || sessionScope.WISHLIST != null}">
                                     <!--wishlist block start-->
@@ -214,9 +212,7 @@
                                             <li>
                                                 <a class="active" data-toggle="tab" href="#large" role="tab" aria-controls="large" aria-selected="true"><i class="fa fa-th-large"></i></a>
                                             </li>
-                                            <!--                                            <li>
-                                                                                            <a data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false"><i class="fa fa-th-list"></i></a>
-                                                                                        </li>-->
+                                            
                                         </ul>
                                     </div>
                                     <div class="page_amount">
@@ -300,128 +296,91 @@
                                                 </c:forEach>
                                             </div>  
                                         </div>
-                                        <!--                                        <div class="tab-pane fade" id="list" role="tabpanel">
-                                        <c:forEach items="${requestScope.LISTPRODUCTS}" var="p">
-                                            <div class="product_list_item mb-35">
-                                                <div class="row align-items-center">
-                                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                                        <div class="product_thumb">
-                                                            <a href="SingleProductServlet?product_id=${p.id}"><img src="${p.images[0]}" alt=""></a> 
-                                                            <div class="hot_img">
-                                                                <img src="view\assets\img\cart\span-hot.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-6 col-sm-6">
-                                                        <div class="list_product_content">
-                                                            <div class="list_title">
-                                                                <h3><a href="SingleProductServlet?product_id=${p.id}">${p.name}</a></h3>
-                                                            </div>
-                                                            <p class="design">${p.description}</p>
-                                                            <div class="content_price">
-                                            <c:if test="${p.price != p.salePrice}">
-                                                <span class="old_price" id="oldprice">Rs. ${p.price}</span>
-                                            </c:if>
-                                            <span class="current_price">Rs. ${p.salePrice}
-                                            </span>
-                                        </div>
-                                        <div class="add_links">
-                                            <ul>
-                                                <li><a href="CartServlet?product_id=${p.id}&quantity=1" title="add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-                                                <li><a href="#" title="add to wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-
-                                                <li><a href="SingleProductServlet?product_id=${p.id}" title="Quick view"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                                        </c:forEach>
                                     </div>-->
-                                    </div>
-                                </div>    
-                                <!--shop tab product end-->
-
-                                <!--pagination style start--> 
-                                <div class="pagination_style">
-                                    <div class="page_number">
-                                        <span>Pages: </span>
-                                        <ul>
-                                            <!--PAGING SHOPSERVLET--> 
-                                            <c:if test="${requestScope.DATA_FROM == 'ShopServlet'}">
-                                                <c:set var="page" value="${requestScope.CURRENTPAGE}"/>
-                                                <c:if test="${page != 1}">
-                                                    <li>
-                                                        <a href="ShopServlet?page=${page - 1}">«</a>
-                                                    </li>
-                                                </c:if>
-                                                <c:forEach var="i" begin="1" end="${requestScope.NUMBERPAGE}">
-                                                    <li>
-                                                        <a style="${page == i ? "color: #e84c3d" :""}" href="ShopServlet?page=${i}">${i}</a>
-                                                    </li>
-                                                </c:forEach>
-                                                <c:if test="${page != NUMBERPAGE}">
-                                                    <li>
-                                                        <a href="ShopServlet?page=${page + 1}">»</a>
-                                                    </li>
-                                                </c:if>
-                                            </c:if>
-                                            <!--PAGING FILTERSERVLET--> 
-                                            <c:if test="${requestScope.DATA_FROM == 'FilterServlet'}">
-                                                <c:set var="page" value="${requestScope.CURRENTPAGE}"/>
-                                                <c:if test="${page != 1}">
-                                                    <li>
-                                                        <a href="FilterServlet?page=${page - 1}&${requestScope.QUERYSTRING}">«</a>
-                                                    </li>
-                                                </c:if>
-                                                <c:forEach var="i" begin="1" end="${requestScope.NUMBERPAGE}">
-                                                    <li>
-                                                        <a style="${page == i ? "color: #e84c3d" :""}" href="FilterServlet?page=${i}&${requestScope.QUERYSTRING}">${i}</a>
-                                                    </li>
-                                                </c:forEach>
-                                                <c:if test="${page != NUMBERPAGE}">
-                                                    <li>
-                                                        <a href="FilterServlet?page=${page + 1}&${requestScope.QUERYSTRING}">»</a>
-                                                    </li>
-                                                </c:if>
-                                            </c:if>
-                                            <!--PAGING SEARCHSERLET--> 
-                                            <c:if test="${requestScope.DATA_FROM == 'SearchServlet'}">
-                                                <c:set var="page" value="${requestScope.CURRENTPAGE}"/>
-                                                <c:if test="${page != 1}">
-                                                    <li>
-                                                        <a href="SearchServlet?page=${page - 1}&sort_group=${requestScope.SORT_GROUP}">«</a>
-                                                    </li>
-                                                </c:if>
-                                                <c:forEach var="i" begin="1" end="${requestScope.NUMBERPAGE}">
-                                                    <li>
-                                                        <a style="${page == i ? "color: #e84c3d" :""}" href="SearchServlet?&page=${i}&sort_group=${requestScope.SORT_GROUP}">${i}</a>
-                                                    </li>
-                                                </c:forEach>
-                                                <c:if test="${page != NUMBERPAGE}">
-                                                    <li>
-                                                        <a href="SearchServlet?page=${page + 1}&id_group=${requestScope.ID_GROUP}&sort_group=${requestScope.SORT_GROUP}">»</a>
-                                                    </li>
-                                                </c:if>
-                                            </c:if>
-                                        </ul>
-                                    </div>
                                 </div>
-                                <!--pagination style end--> 
-                            </div>
-                        </div>  
-                    </div>
-                    <!--pos home section end-->
-                </div>
-                <!--pos page inner end-->
-            </div>
-        </div>
-        <!--pos page end-->
+                            </div>    
+                            <!--shop tab product end-->
 
-        <!--footer area start-->
-        <%@include file="../../common/web/footer.jsp"%>
-        <%@include file="../../common/web/add_js.jsp"%>
-    </body>
+                            <!--pagination style start--> 
+                            <div class="pagination_style">
+                                <div class="page_number">
+                                    <span>Pages: </span>
+                                    <ul>
+                                        <!--PAGING SHOPSERVLET--> 
+                                        <c:if test="${requestScope.DATA_FROM == 'ShopServlet'}">
+                                            <c:set var="page" value="${requestScope.CURRENTPAGE}"/>
+                                            <c:if test="${page != 1}">
+                                                <li>
+                                                    <a href="ShopServlet?page=${page - 1}">«</a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach var="i" begin="1" end="${requestScope.NUMBERPAGE}">
+                                                <li>
+                                                    <a style="${page == i ? "color: #e84c3d" :""}" href="ShopServlet?page=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${page != NUMBERPAGE}">
+                                                <li>
+                                                    <a href="ShopServlet?page=${page + 1}">»</a>
+                                                </li>
+                                            </c:if>
+                                        </c:if>
+                                        <!--PAGING FILTERSERVLET--> 
+                                        <c:if test="${requestScope.DATA_FROM == 'FilterServlet'}">
+                                            <c:set var="page" value="${requestScope.CURRENTPAGE}"/>
+                                            <c:if test="${page != 1}">
+                                                <li>
+                                                    <a href="FilterServlet?page=${page - 1}&${requestScope.QUERYSTRING}">«</a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach var="i" begin="1" end="${requestScope.NUMBERPAGE}">
+                                                <li>
+                                                    <a style="${page == i ? "color: #e84c3d" :""}" href="FilterServlet?page=${i}&${requestScope.QUERYSTRING}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${page != NUMBERPAGE}">
+                                                <li>
+                                                    <a href="FilterServlet?page=${page + 1}&${requestScope.QUERYSTRING}">»</a>
+                                                </li>
+                                            </c:if>
+                                        </c:if>
+
+                                        <!--PAGING SEARCHSERLET--> 
+                                        <c:if test="${requestScope.DATA_FROM == 'SearchServlet'}">
+                                            <c:set var="page" value="${requestScope.CURRENTPAGE}"/>
+                                            <c:if test="${page != 1}">
+                                                <li>
+                                                    <a href="SearchServlet?page=${page - 1}&sort_group=${requestScope.SORT_GROUP}">«</a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach var="i" begin="1" end="${requestScope.NUMBERPAGE}">
+                                                <li>
+                                                    <a style="${page == i ? "color: #e84c3d" :""}" href="SearchServlet?&page=${i}&sort_group=${requestScope.SORT_GROUP}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <c:if test="${page != NUMBERPAGE}">
+                                                <li>
+                                                    <a href="SearchServlet?page=${page + 1}&id_group=${requestScope.ID_GROUP}&sort_group=${requestScope.SORT_GROUP}">»</a>
+                                                </li>
+                                            </c:if>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--pagination style end--> 
+                        </div>
+                    </div>  
+                </div>
+                <!--pos home section end-->
+            </div>
+            <!--pos page inner end-->
+        </div>
+    </div>
+    <!--pos page end-->
+
+    <!--footer area start-->
+    <%@include file="../../common/web/footer.jsp"%>
+    <%@include file="../../common/web/add_js.jsp"%>
+</body>
 </html>
 
