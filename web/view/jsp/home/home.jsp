@@ -160,7 +160,7 @@
                                 <!--new product area start-->
                                 <div class="new_product_area">
                                     <div class="block_title">
-                                        <h3>Mẫu mới 2024</h3>
+                                        <h3>Mẫu mới 2025</h3>
                                     </div>
                                     <div class="row">
                                         <div class="product_active owl-carousel">

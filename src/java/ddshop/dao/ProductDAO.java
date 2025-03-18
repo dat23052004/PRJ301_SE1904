@@ -24,7 +24,7 @@ public class ProductDAO extends DBContext {
     ResultSet rs;
 
     private static final String GET_DATA = "SELECT * FROM Products WHERE status = 1";
-    private static final String GET_PRODUCTS_NEW_BY_YEAR = "SELECT * from Products WHERE year(releasedate) = 2024 AND status = 1";
+    private static final String GET_PRODUCTS_NEW_BY_YEAR = "SELECT * from Products WHERE year(releasedate) = 2025 AND status = 1";
     private static final String GET_PRODUCTS_BEST_SELLER = "select top(5) * from Products where status=1 order by unitSold desc";
     private static final String GET_PRODUCTS_BY_SUPPLIER_ID = "SELECT * FROM Products WHERE supplierid = ? AND status = 1";
     private static final String GET_PRODUCTS_BY_ID = "SELECT * FROM Products WHERE id = ? AND status = 1";
@@ -415,6 +415,10 @@ public class ProductDAO extends DBContext {
         } catch (Exception e) {
             System.out.println("getProducts: " + e.getMessage());
         }
+    }
+
+    public List<Products> getProductBySearch(String txtSearch) {
+        return null;
     }
 
 }

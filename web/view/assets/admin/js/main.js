@@ -82,7 +82,7 @@ function changeStatus(button, orderID) {
     var id = orderID;
     var action = 'changeStatus';
     $.ajax({
-        url: "/PRJ301_Sp24_ClothesShop/ManageOrderServlet",
+        url: "/DDShop/ManageOrderServlet",
         type: "post",
         data: {
             id: id,

@@ -45,151 +45,152 @@
                         <div class="tile-body">
                             <div class="row element-button"
                                  <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                            class="fas fa-print"></i> In dữ liệu</a>
-                                </div>
+                                <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
+                                        class="fas fa-print"></i> In dữ liệu</a>
                             </div>
-                            <table class="table table-hover table-bordered" id="sampleTable">
-                                <thead>
-                                    <tr>
-                                        <th>ID đơn hàng</th>
-                                        <th>Khách hàng</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Ngày mua</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Thanh Toán</th>
-                                        <th>Trạng thái</th>
-                                        <th>Tính năng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach items="${LIST_ORDERS}" var="b">
-                                        <tr>
-                                            <td>${b.getOrderId()}</td>
-                                            <td>${b.getUser().getUsername()}</td>
-                                            <td>(+84) ${b.getUser().getPhone()}</td>
-                                            <td>${b.getUser().getAddress()}</td>
-                                            <td>${b.orderDate}</td>
-                                            <td>${b.totalPrice}</td>
-                                            <td><span class="badge bg-success">${b.paymentMethod.paymentMethod}</span></td>
-                                            <td>
-                                                ${b.status?"Đã giao":"Chưa giao..."}
-                                                <c:if test="${!b.status}">
-                                                    <button style="margin-left: 20px; float: right; cursor: pointer" onclick="changeStatus(this, ${b.getOrderId()})">
-                                                        <i style="color: green" class="fa-solid fa-check"></i>
-                                                    </button>
-                                                </c:if>
-                                            </td>
-                                            <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="ManageOrderServlet?action=showdetail&bill_id=${b.getOrderId()}"><i class="fa"></i>Chi tiết đơn hàng</a></td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
                         </div>
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>ID đơn hàng</th>
+                                    <th>Khách hàng</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Ngày mua</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Thanh Toán</th>
+                                    <th>Trạng thái</th>
+                                    <th>Tính năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${LIST_ORDERS}" var="b">
+                                    <tr>
+                                        <td>${b.getOrderId()}</td>
+                                        <td>${b.getUser().getUsername()}</td>
+                                        <td>(+84) ${b.getUser().getPhone()}</td>
+                                        <td>${b.getUser().getAddress()}</td>
+                                        <td>${b.orderDate}</td>
+                                        <td>${b.totalPrice}</td>
+                                        <td><span class="badge bg-success">${b.paymentMethod.paymentMethod}</span></td>
+                                        <td>
+                                            ${b.isStatus()?"Đã giao":"Chưa giao..."}
+                                            <c:if test="${!b.status}">
+                                                <button style="margin-left: 20px; float: right; cursor: pointer" onclick="changeStatus(this, ${b.getOrderId()})">
+                                                    <i style="color: green" class="fa-solid fa-check"></i>
+                                                </button>
+                                            </c:if>
+                                        </td>
+                                        <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="ManageOrderServlet?action=showdetail&bill_id=${b.getOrderId()}"><i class="fa"></i>Chi tiết đơn hàng</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </main>
-        <!-- Essential javascripts for application to work-->
-        <script src="view/assets/admin/js/jquery-3.2.1.min.js"></script>
-        <script src="view/assets/admin/js/popper.min.js"></script>
-        <script src="view/assets/admin/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="view/assets/admin/js/main.js"></script>
-        <!-- The javascript plugin to display page loading on top-->
-        <script src="view/assets/admin/js/plugins/pace.min.js"></script>
-        <!-- Page specific javascripts-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-        <!-- Data table plugin-->
-        <script type="text/javascript" src="view/assets/admin/js/plugins/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="view/assets/admin/js/plugins/dataTables.bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
-<script src="https://cdn.datatables.net/plug-ins/1.11.5/sorting/datetime-moment.js"></script>
+        </div>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="view/assets/admin/js/jquery-3.2.1.min.js"></script>
+    <script src="view/assets/admin/js/popper.min.js"></script>
+    <script src="view/assets/admin/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="view/assets/admin/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="view/assets/admin/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="view/assets/admin/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="view/assets/admin/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.11.5/sorting/datetime-moment.js"></script>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 //                                                        $('#sampleTable').DataTable();
 //                                                        $(document).ready(function () {
-    $(document).ready(function () {
-    // Register Moment.js format
-    $.fn.dataTable.moment('YYYY-MM-DD HH:mm:ss.SSS');
+                                                    $(document).ready(function () {
+                                                        // Register Moment.js format
+                                                        $.fn.dataTable.moment('YYYY-MM-DD HH:mm:ss.SSS');
 
-    // Initialize DataTable
-    $('#sampleTable').DataTable({
-        "order": [[4, "desc"]] // Index 2 for the 'orderdate' column
-    });
-});
-                                                        //Thời Gian
-                                                        function time() {
-                                                            var today = new Date();
-                                                            var weekday = new Array(7);
-                                                            weekday[0] = "Chủ Nhật";
-                                                            weekday[1] = "Thứ Hai";
-                                                            weekday[2] = "Thứ Ba";
-                                                            weekday[3] = "Thứ Tư";
-                                                            weekday[4] = "Thứ Năm";
-                                                            weekday[5] = "Thứ Sáu";
-                                                            weekday[6] = "Thứ Bảy";
-                                                            var day = weekday[today.getDay()];
-                                                            var dd = today.getDate();
-                                                            var mm = today.getMonth() + 1;
-                                                            var yyyy = today.getFullYear();
-                                                            var h = today.getHours();
-                                                            var m = today.getMinutes();
-                                                            var s = today.getSeconds();
-                                                            m = checkTime(m);
-                                                            s = checkTime(s);
-                                                            nowTime = h + " giờ " + m + " phút " + s + " giây";
-                                                            if (dd < 10) {
-                                                                dd = '0' + dd
-                                                            }
-                                                            if (mm < 10) {
-                                                                mm = '0' + mm
-                                                            }
-                                                            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                                            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                                                    '</span>';
-                                                            document.getElementById("clock").innerHTML = tmp;
-                                                            clocktime = setTimeout("time()", "1000", "Javascript");
+                                                        // Initialize DataTable
+                                                        $('#sampleTable').DataTable({
+                                                            "order": [[4, "desc"]] // Index 2 for the 'orderdate' column
 
-                                                            function checkTime(i) {
-                                                                if (i < 10) {
-                                                                    i = "0" + i;
-                                                                }
-                                                                return i;
-                                                            }
+                                                        });
+                                                    });
+                                                    //Thời Gian
+                                                    function time() {
+                                                        var today = new Date();
+                                                        var weekday = new Array(7);
+                                                        weekday[0] = "Chủ Nhật";
+                                                        weekday[1] = "Thứ Hai";
+                                                        weekday[2] = "Thứ Ba";
+                                                        weekday[3] = "Thứ Tư";
+                                                        weekday[4] = "Thứ Năm";
+                                                        weekday[5] = "Thứ Sáu";
+                                                        weekday[6] = "Thứ Bảy";
+                                                        var day = weekday[today.getDay()];
+                                                        var dd = today.getDate();
+                                                        var mm = today.getMonth() + 1;
+                                                        var yyyy = today.getFullYear();
+                                                        var h = today.getHours();
+                                                        var m = today.getMinutes();
+                                                        var s = today.getSeconds();
+                                                        m = checkTime(m);
+                                                        s = checkTime(s);
+                                                        nowTime = h + " giờ " + m + " phút " + s + " giây";
+                                                        if (dd < 10) {
+                                                            dd = '0' + dd
                                                         }
-        </script>
-        <script>
+                                                        if (mm < 10) {
+                                                            mm = '0' + mm
+                                                        }
+                                                        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                                                        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                                                                '</span>';
+                                                        document.getElementById("clock").innerHTML = tmp;
+                                                        clocktime = setTimeout("time()", "1000", "Javascript");
 
-            $(document).ready(jQuery(function () {
-                jQuery(".trash").click(function () {
-                    swal({
-                        title: "Cảnh báo",
-                        text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
-                        buttons: ["Hủy bỏ", "Đồng ý"],
-                    })
-                            .then((willDelete) => {
-                                if (willDelete) {
-                                    window.location = "productmanager?action=deleteproduct&product_id=" + $(this).attr("value");
-                                    swal("Đã xóa thành công.!", {
-                                    });
-                                }
-                            });
-                });
-            }));
-        </script>
-        <script>
-            var myApp = new function () {
-                this.printTable = function () {
-                    var tab = document.getElementById('sampleTable');
-                    var win = window.open('', '', 'height=700,width=700');
-                    win.document.write(tab.outerHTML);
-                    win.document.close();
-                    win.print();
-                };
+                                                        function checkTime(i) {
+                                                            if (i < 10) {
+                                                                i = "0" + i;
+                                                            }
+                                                            return i;
+                                                        }
+                                                    }
+    </script>
+    <script>
+
+        $(document).ready(jQuery(function () {
+            jQuery(".trash").click(function () {
+                swal({
+                    title: "Cảnh báo",
+                    text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
+                    buttons: ["Hủy bỏ", "Đồng ý"],
+                })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.location = "productmanager?action=deleteproduct&product_id=" + $(this).attr("value");
+                                swal("Đã xóa thành công.!", {
+                                });
+                            }
+                        });
+            });
+        }));
+    </script>
+    <script>
+        var myApp = new function () {
+            this.printTable = function () {
+                var tab = document.getElementById('sampleTable');
+                var win = window.open('', '', 'height=700,width=700');
+                win.document.write(tab.outerHTML);
+                win.document.close();
+                win.print();
             };
-        </script>
-    </body>
+        };
+    </script>
+</body>
 
 </html>

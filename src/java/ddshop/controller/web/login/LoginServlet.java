@@ -97,11 +97,11 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(u);
                 response.addCookie(p);
                 response.addCookie(r);
-//                if (user.getRole() == 1) {
-//                    response.sendRedirect(ADMIN_DASHBOARD);
-//                } else {
-//                    response.sendRedirect(WELCOME);
-//                }
+                if (user.getRole() == 1) {
+                    response.sendRedirect(ADMIN_DASHBOARD);
+                } else {
+                    response.sendRedirect(WELCOME);
+                }
             } else {
                 String error = "Invalid username or password!";
                 request.setAttribute("msg", error);
