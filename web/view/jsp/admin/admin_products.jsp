@@ -84,17 +84,17 @@
                                     <tbody>
                                         <c:forEach items="${requestScope.LIST_PRODUCTS}" var="p">
                                             <tr>
-                                                <td>${p.id}</td>
+                                                <td>${p.getId()}</td>
                                                 <td>${p.getCategory().getName()}</td>
-                                                <td style="max-width: 200px">${p.name}</td>
+                                                <td style="max-width: 200px">${p.getName()}</td>
                                                 <td>${p.getPrice()}</td>
                                                 <td>
-                                                    <c:forEach items="${p.size}" var="s" varStatus="loop">
+                                                    <c:forEach items="${p.getSizes()}" var="s" varStatus="loop">
                                                         ${s}<c:if test="${not loop.last}">,</c:if>
                                                     </c:forEach>
                                                 </td>
                                                 <td>
-                                                    <c:forEach items="${p.colors}" var="c" varStatus="loop">    
+                                                    <c:forEach items="${p.getColors()}" var="c" varStatus="loop">    
                                                         ${c}<c:if test="${not loop.last}">,</c:if>
                                                     </c:forEach>
                                                 </td>
@@ -102,10 +102,10 @@
                                                 <td><img src="${p.images[0]}" alt="" width="100px;"></td>
 
                                                 <td>
-                                                    <a class="btn btn-primary btn-sm trash" id="logout" data-toggle="modal" data-target="#modal_box" href="#" onclick="confirmDelete('modal_box', ${p.id})">
+                                                    <a class="btn btn-primary btn-sm trash" id="logout" data-toggle="modal" data-target="#modal_box" href="#" onclick="confirmDelete('modal_box', ${p.getId()})">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
-                                                    <a class="btn btn-primary btn-sm edit" href="EditProductServlet?product_id=${p.id}"><i class="fas fa-edit"></i>
+                                                    <a class="btn btn-primary btn-sm edit" href="EditProductServlet?product_id=${p.getId()}"><i class="fas fa-edit"></i>
                                                     </a>
                                                 </td>
                                             </tr>

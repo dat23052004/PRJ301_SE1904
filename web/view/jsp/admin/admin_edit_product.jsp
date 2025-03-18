@@ -56,7 +56,7 @@
                                     <label for="exampleSelect1" class="control-label">Danh mục</label>
                                     <select name="category_id" class="form-control" id="exampleSelect1">
                                         <c:forEach items="${requestScope.LIST_CATEGORIES}" var="cat">
-                                            <option ${cat.id == pcategory.id ? "selected" : ""} value="${cat.id}">${cat.name}</option>
+                                            <option ${cat.getId() == pcategory.id ? "selected" : ""} value="${cat.getId()}">${cat.getName()}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -64,7 +64,7 @@
                                     <label for="exampleSelect2" class="control-label">Loại</label>
                                     <select name="type_id" class="form-control" id="exampleSelect2">
                                         <c:forEach items="${requestScope.LIST_TYPES}" var="type">
-                                            <option ${type.id == ptype.id ? "selected" : ""} value="${type.id}">${type.name}</option>
+                                            <option ${type.getId() == ptype.id ? "selected" : ""} value="${type.id}">${type.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -72,7 +72,7 @@
                                     <label for="exampleSelect3" class="control-label">Hãng</label>
                                     <select name="supplier_id" class="form-control" id="exampleSelect3">
                                         <c:forEach items="${requestScope.LIST_SUPPLIERS}" var="sup">
-                                            <option ${sup.id == psupplier.id ? "selected" : ""} value="${sup.id}">${sup.name}</option>
+                                            <option ${sup.getId() == psupplier.getId() ? "selected" : ""} value="${sup.getId()}">${sup.getName()}</option>
                                         </c:forEach>
                                     </select>
                                 </div>

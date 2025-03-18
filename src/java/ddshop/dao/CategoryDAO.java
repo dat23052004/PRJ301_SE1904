@@ -23,6 +23,9 @@ public class CategoryDAO extends DBContext {
 
     private static final String GET_DATA = "select * from Categories";
     private static final String GET_CATEGORYS_BY_ID = "select * from Categories where categoryid = ?";
+    private static final String UPDATE_CATEGORY = "UPDATE Categories SET categoryname = ?, Type_id = ? WHERE categoryid = ?";
+    private static final String INSERT_CATEGORY = "INSERT INTO Categories VALUES (?,?)";
+    private static final String DELETE_CATEGORY = "DELETE FROM Categories WHERE categoryid = ?";
 
     public List<Categorys> getData() {
         List<Categorys> data = new ArrayList<Categorys>();
@@ -44,7 +47,7 @@ public class CategoryDAO extends DBContext {
     }
 
     Categorys getCategoryById(int id) {
-    try {
+        try {
             stm = connection.prepareStatement(GET_CATEGORYS_BY_ID);
             stm.setInt(1, id);
             rs = stm.executeQuery();
@@ -52,7 +55,7 @@ public class CategoryDAO extends DBContext {
                 String name = rs.getString(2);
                 TypeDAO tDao = new TypeDAO();
                 Types type = tDao.getTypeById(rs.getInt(3));
-                Categorys category = new Categorys(id, name, type);               
+                Categorys category = new Categorys(id, name, type);
                 return category;
             }
 
@@ -60,15 +63,51 @@ public class CategoryDAO extends DBContext {
             System.out.println("getTypes: " + e.getMessage());
 
         }
-        return null; 
+        return null;
     }
+
     public static void main(String[] args) {
         List<Categorys> list = (new CategoryDAO()).getData();
-        if(list == null || list.size()==0){
+        if (list == null || list.size() == 0) {
             System.out.println("hihi");
-        }else{
-            System.out.println(list.size()-1);
+        } else {
+            System.out.println(list.size() - 1);
         }
-        
+
+    }
+
+    public void deleteCategory(int cid) {
+        try {
+            stm = connection.prepareStatement(DELETE_CATEGORY);
+            stm.setInt(1, cid);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("getTypes: " + e.getMessage());
+
+        }
+    }
+
+    public void editCategory(String cName, int tId, int cid) {
+        try {
+            stm = connection.prepareStatement(UPDATE_CATEGORY);
+            stm.setString(1, cName);
+            stm.setInt(2, tId);
+            stm.setInt(3, cid);
+            stm.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public boolean insertCategory(String cateName, int typeId) {
+        try {
+            stm = connection.prepareStatement(INSERT_CATEGORY);
+            stm.setString(1, cateName);
+            stm.setInt(2, typeId);
+            stm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println("getTypes: " + e.getMessage());
+        }
+        return false;
     }
 }

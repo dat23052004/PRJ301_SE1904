@@ -63,13 +63,13 @@
                                 <tbody>
                                     <c:forEach items="${LIST_PRODUCTS_IN_ORDER}" var="d">
                                         <tr>
-                                            <td><img src="${d.product.images[0]}" alt="" width="100px;"></td>
-                                            <td>${d.product.id}</td>
-                                            <td>${d.product.name}</td>
-                                            <td>${d.product.size[0]}</td>
-                                            <td>${d.product.colors[0]}</td>
-                                            <td>${d.quantity}</td>
-                                            <td>${d.price}</td>
+                                            <td><img src="${d.getProduct().getImages()[0]}" alt="" width="100px;"></td>
+                                            <td>${d.getProduct().getId()}</td>
+                                            <td>${d.getProduct().getName()}</td>
+                                            <td>${d.getProduct().getSizes()[0]}</td>
+                                            <td>${d.getProduct().getColors()[0]}</td>
+                                            <td>${d.getQuantity()}</td>
+                                            <td>${d.getPrice()}</td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

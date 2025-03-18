@@ -64,21 +64,21 @@
                                 <tbody>
                                     <c:forEach items="${LIST_CATEGORIES}" var="c">
                                         <tr>
-                                            <td>${c.id}</td>
-                                            <td>${c.name}</td>
+                                            <td>${c.getId()}</td>
+                                            <td>${c.getName()}</td>
                                             <td>
                                                 <c:forEach items="${requestScope.LIST_TYPES}" var="t">
-                                                    <c:if test="${c.type.id == t.id}" >
-                                                        ${t.name}
+                                                    <c:if test="${c.getType().getId() == t.getId()}" >
+                                                        ${t.getName()}
                                                     </c:if>
                                                 </c:forEach>
                                             </td>
                                             <td>
-                                                <a class="btn btn-primary btn-sm trash" id="logout" data-toggle="modal" data-target="#modal_box" href="#" onclick="confirmDelete('modal_box', ${c.id})">
+                                                <a class="btn btn-primary btn-sm trash" id="logout" data-toggle="modal" data-target="#modal_box" href="#" onclick="confirmDelete('modal_box', ${c.getId()})">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
                                                 <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                                        data-toggle="modal" data-target="#ModalUP${c.id}"><i class="fas fa-edit"></i>
+                                                        data-toggle="modal" data-target="#ModalUP${c.getId()}"><i class="fas fa-edit"></i>
                                                 </button>
                                             </td>
                                         </tr>
@@ -87,7 +87,7 @@
                                         MODAL
                                         -->
 
-                                    <div class="modal fade" id="ModalUP${c.id}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                                    <div class="modal fade" id="ModalUP${c.getId()}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                                          data-keyboard="false">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -103,17 +103,17 @@
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Mã danh mục</label>
-                                                                <input class="form-control" type="text" readonly name="category_id" value="${c.id}">
+                                                                <input class="form-control" type="text" readonly name="category_id" value="${c.getId()}">
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Tên</label>
-                                                                <input class="form-control" type="text" name="category_name" value="${c.name}">
+                                                                <input class="form-control" type="text" name="category_name" value="${c.getName()}">
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label for="exampleSelect1" class="control-label">Danh mục</label>
                                                                 <select name="type_id" class="form-control" id="exampleSelect1">
                                                                     <c:forEach items="${LIST_TYPES}" var="type">
-                                                                        <option ${c.type.id == type.id ? "selected" : ""} value="${type.id}">${type.name}</option>
+                                                                        <option ${c.getType().getId() == type.getId() ? "selected" : ""} value="${type.getId()}">${type.getName()}</option>
                                                                     </c:forEach>
                                                                 </select>
                                                             </div>

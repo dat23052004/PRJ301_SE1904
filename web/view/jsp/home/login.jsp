@@ -16,8 +16,6 @@
     </head>
     <body>
         <!-- Add your site or application content here -->
-        ${ERROR}
-        ${SUCCESS}
         <!--pos page start-->
         <div class="pos_page">
             <div class="container"> 

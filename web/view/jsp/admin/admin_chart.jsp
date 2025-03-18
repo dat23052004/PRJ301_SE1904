@@ -95,10 +95,10 @@
         var myChart2 = new Chart(ctx2, {
             type: "line",
             data: {
-                labels: ["2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+                labels: [ "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
                 datasets: [{
                         label: "Revenue",
-                        data: [${YEAR18}, ${YEAR19}, ${YEAR20}, ${YEAR21}, ${YEAR22}, ${YEAR23}, ${YEAR24}],
+                        data: [ ${YEAR19}, ${YEAR20}, ${YEAR21}, ${YEAR22}, ${YEAR23}, ${YEAR24},${YEAR25}],
                         backgroundColor: "rgba(0, 156, 255, .5)",
                         fill: true
                     }

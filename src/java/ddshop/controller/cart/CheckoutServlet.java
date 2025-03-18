@@ -50,8 +50,7 @@ public class CheckoutServlet extends HttpServlet {
         OrderDAO oDao = new OrderDAO();
         OrderItemDAO oiDao = new OrderItemDAO();
         CartUtil cUtil = new CartUtil();
-
-        Orders orders = null;
+        Orders orderLatest = null;
         double total = 0;
         int totalQuantitys = 0;
         String message = "";
@@ -69,6 +68,7 @@ public class CheckoutServlet extends HttpServlet {
             List<CartItem> cartItems = (List<CartItem>) session.getAttribute("CART");
             if (user != null && user.getRole() != 1 && paymentId != null) {
                 Payments payment = pmDAO.getPaymentById(Integer.parseInt(paymentId));
+                
                 for (CartItem item : cartItems) {
                     // Check quanity of product in stock
                     if (pDao.getStock(item.getProduct().getId()) > 5 && item.getQuantity() < item.getProduct().getStock()) {
@@ -76,6 +76,7 @@ public class CheckoutServlet extends HttpServlet {
                         totalQuantitys += item.getQuantity();
                     }
                 }
+                
                 LocalDateTime dateNow = LocalDateTime.now();
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String date = dateNow.format(format);
@@ -83,8 +84,10 @@ public class CheckoutServlet extends HttpServlet {
                 if (oDao.createNewOrder(date, total, payment, user)) {
                     message = "Order Success";
 
+                    orderLatest = oDao.getTheLatestOrder();
+
                     for (CartItem cart : cartItems) {
-                        oiDao.createNewOrderDetail(cart, orders);
+                        oiDao.createNewOrderDetail(cart, orderLatest);
                         // Update product quantity
                         pDao.updateQuantityProduct(cart);
                     }

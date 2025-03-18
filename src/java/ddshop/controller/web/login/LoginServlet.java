@@ -22,6 +22,7 @@ import java.sql.ResultSet;
  *
  * @author MY PC
  */
+
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 

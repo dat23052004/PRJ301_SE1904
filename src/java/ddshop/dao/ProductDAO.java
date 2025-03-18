@@ -26,11 +26,17 @@ public class ProductDAO extends DBContext {
     private static final String GET_DATA = "SELECT * FROM Products WHERE status = 1";
     private static final String GET_PRODUCTS_NEW_BY_YEAR = "SELECT * from Products WHERE year(releasedate) = 2024 AND status = 1";
     private static final String GET_PRODUCTS_BEST_SELLER = "select top(5) * from Products where status=1 order by unitSold desc";
-//    private static final String GET_PRODUCT_BY_COLOR = "select * From Products where colors like ?";
     private static final String GET_PRODUCTS_BY_SUPPLIER_ID = "SELECT * FROM Products WHERE supplierid = ? AND status = 1";
     private static final String GET_PRODUCTS_BY_ID = "SELECT * FROM Products WHERE id = ? AND status = 1";
     private static final String UPDATE_QUANTITY_PRODUCT = "UPDATE Products SET [stock] = ? WHERE id = ?";
     private static final String GET_STOCK = "SELECT stock AS Total FROM Products WHERE id = ?";
+    private static final String GET_TOTAL_PRODUCTS = "SELECT COUNT(*) AS Total FROM Products WHERE status = 1";
+    private static final String GET_PRODUCTS_LOW_QUANTITY = "SELECT COUNT(*) AS Total from Products WHERE Stock < 10 AND status = 1";
+    private static final String INSERT_PRODUCT = "INSERT INTO Products VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String DELETE_PRODUCT = "UPDATE Products SET status = 0 WHERE id = ?";
+    private static final String UPDATE_PRODUCT = "UPDATE Products SET productname = ?, [description] = ?, stock = ?, "
+            + "[images] = ?, [colors] = ?, size = ?, releasedate = ?, discount = ?, "
+            + "price = ?, categoryid = ?, supplierid = ?, typeid = ? WHERE id = ?";
 
     public List<Products> getData() {
         List<Products> data = new ArrayList<>();
@@ -326,6 +332,89 @@ public class ProductDAO extends DBContext {
             System.out.println("getProducts: " + e.getMessage());
         }
 
+    }
+
+    public int getTotalProduct() {
+        int result = 0;
+        try {
+            stm = connection.prepareStatement(GET_TOTAL_PRODUCTS);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("Total");
+            }
+        } catch (Exception e) {
+            System.out.println("getProducts: " + e.getMessage());
+        }
+        return result;
+    }
+
+    public int getProductsLowQuantiry() {
+        int result = 0;
+        try {
+            stm = connection.prepareStatement(GET_PRODUCTS_LOW_QUANTITY);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("Total");
+            }
+        } catch (Exception e) {
+            System.out.println("getProducts: " + e.getMessage());
+        }
+        return result;
+    }
+
+    public void deleteProduct(int pid) {
+        try {
+            stm = connection.prepareStatement(DELETE_PRODUCT);
+            stm.setInt(1, pid);
+            stm.executeUpdate();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void editProduct(int pid, String pname, String pdescription, int pstock, String image, String pcolors, String psizes, String pdate, double pdiscount, double pprice, int pcategory, int psupplier, int ptype) {
+        try {
+            stm = connection.prepareStatement(UPDATE_PRODUCT);
+            stm.setString(1, pname);
+            stm.setString(2, pdescription);
+            stm.setInt(3, pstock);
+            stm.setString(4, image);
+            stm.setString(5, pcolors);
+            stm.setString(6, psizes);
+            stm.setDate(7, Date.valueOf(pdate)); // Chuyển String thành Date
+            stm.setDouble(8, pdiscount);
+            stm.setDouble(9, pprice);
+            stm.setInt(10, pcategory);
+            stm.setInt(11, psupplier);
+            stm.setInt(12, ptype);
+            stm.setInt(13, pid);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("getProducts: " + e.getMessage());
+        }
+    }
+
+    public void insertProduct(String name, int cId, int sId, int tId, double price, double discount, String size, String color, int stock, String date, String image, String description) {
+        try {
+            stm = connection.prepareStatement(INSERT_PRODUCT);
+            stm.setString(1, name);
+            stm.setInt(2, sId);
+            stm.setInt(3, cId);
+            stm.setString(4, size);
+            stm.setInt(5, stock);
+            stm.setString(6, description);
+            stm.setString(7, image);
+            stm.setString(8, color);
+            stm.setString(9, date);
+            stm.setDouble(10, discount);
+            stm.setInt(11, 0);
+            stm.setDouble(12, price);
+            stm.setInt(13, 1);
+            stm.setInt(14, tId);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("getProducts: " + e.getMessage());
+        }
     }
 
 }

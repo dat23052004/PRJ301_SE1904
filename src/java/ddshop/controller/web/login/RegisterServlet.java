@@ -69,6 +69,8 @@ public class RegisterServlet extends HttpServlet {
                 uList.registerUser(u);
                 mess = "Register successfully. Please Login!";
                 request.setAttribute("SUCCESS", mess);
+                request.setAttribute("uName", username);
+                request.setAttribute("uPass", password);
             }
 
         } catch (Exception e) {

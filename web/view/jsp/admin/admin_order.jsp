@@ -66,8 +66,8 @@
                                 <tbody>
                                     <c:forEach items="${LIST_ORDERS}" var="b">
                                         <tr>
-                                            <td>${b.orderID}</td>
-                                            <td>${b.getUser().getUserName()}</td>
+                                            <td>${b.getOrderId()}</td>
+                                            <td>${b.getUser().getUsername()}</td>
                                             <td>(+84) ${b.getUser().getPhone()}</td>
                                             <td>${b.getUser().getAddress()}</td>
                                             <td>${b.orderDate}</td>
@@ -76,12 +76,12 @@
                                             <td>
                                                 ${b.status?"Đã giao":"Chưa giao..."}
                                                 <c:if test="${!b.status}">
-                                                    <button style="margin-left: 20px; float: right; cursor: pointer" onclick="changeStatus(this, ${b.orderID})">
+                                                    <button style="margin-left: 20px; float: right; cursor: pointer" onclick="changeStatus(this, ${b.getOrderId()})">
                                                         <i style="color: green" class="fa-solid fa-check"></i>
                                                     </button>
                                                 </c:if>
                                             </td>
-                                            <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="ManageOrderServlet?action=showdetail&bill_id=${b.getOrderID()}"><i class="fa"></i>Chi tiết đơn hàng</a></td>
+                                            <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="ManageOrderServlet?action=showdetail&bill_id=${b.getOrderId()}"><i class="fa"></i>Chi tiết đơn hàng</a></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

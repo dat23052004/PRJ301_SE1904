@@ -75,16 +75,16 @@
                                         <tr>
                                             <td>${u.getId()}</td>
                                             <td>${u.getFirstName()} ${u.getLastName()}</td>
-                                            <td><img src="${u.avatar}" width="50px" height="50px"></td>
+                                            <td><img src="${u.getAvatar()}" width="50px" height="50px"></td>
                                             <td>${u.getEmail()}</td>
                                             <td>${u.getAddress()}</td>
                                             <td>${u.getPhone()}</td>
-                                            <td>${u.getRoleID() == 1 ? "Admin" : "User"}</td>
+                                            <td>${u.getRole() == 1 ? "Admin" : "User"}</td>
                                             <td>
-                                                <a class="btn btn-primary btn-sm trash" id="logout" data-toggle="modal" data-target="#modal_box" href="#" onclick="confirmDelete('modal_box', ${u.id})">
+                                                <a class="btn btn-primary btn-sm trash" id="logout" data-toggle="modal" data-target="#modal_box" href="#" onclick="confirmDelete('modal_box', ${u.getId()})">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
-                                                <a class="btn btn-primary btn-sm edit" href="EditUserServlet?username=${u.userName}"><i class="fas fa-edit"></i>
+                                                <a class="btn btn-primary btn-sm edit" href="EditUserServlet?username=${u.getUsername()}"><i class="fas fa-edit"></i>
                                                 </a>
                                             </td>
                                         </tr>

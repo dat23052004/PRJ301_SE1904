@@ -175,7 +175,7 @@
                                     <label for="exampleSelect1" class="control-label">Type</label>
                                     <select name="type_id" class="form-control" id="exampleSelect1">
                                         <c:forEach items="${requestScope.LIST_TYPES}" var="type">
-                                            <option value="${type.id}">${type.name}</option>
+                                            <option value="${type.getId()}">${type.getName()}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -183,7 +183,7 @@
                                     <label for="exampleSelect1" class="control-label">Danh mục hiện có</label>
                                     <select class="form-control" id="exampleSelect1">
                                         <c:forEach items="${requestScope.LIST_CATEGORIES}" var="cat">
-                                            <option value="${cat.id}">${cat.name}</option>
+                                            <option value="${cat.getId()}">${cat.getName()}</option>
                                         </c:forEach>
                                     </select>
                                 </div>

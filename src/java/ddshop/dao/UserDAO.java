@@ -25,6 +25,9 @@ public class UserDAO extends DBContext {
     private static final String CHECK_USERNAME_DUPLICATE = "SELECT * FROM Users WHERE userName = ? or email = ? and [status] = 1";
     private static final String REGISTER_USER = "insert into Users(firstname, lastname, email, avatar, username, password, address,phone,roleid,status)  values(?,?,?,?,?,?,?,?,?,?)";
     private static final String UPDATE_USER = "UPDATE Users SET firstName = ?, lastName = ?, email = ?, address = ?, phone = ?, avatar = ?, roleid = ? WHERE username = ?";
+    private static final String GET_TOTAL_USERS = "select count(*) as Total from Users";
+    private static final String GET_USER_BY_NAME = "SELECT * FROM Users WHERE username = ? AND status = 1";
+    private static final String DELETE_USER = "UPDATE Users SET status = 0 WHERE id = ?";
 
     public List<Users> getData() {
         List<Users> list = new ArrayList<>();
@@ -115,10 +118,30 @@ public class UserDAO extends DBContext {
         return false;
     }
 
-   
+    public Users getUserByName(String userName) {
+        Users user = null;
+        try {
+            stm = connection.prepareStatement(GET_USER_BY_NAME);
+            stm.setString(1, userName);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                String email = rs.getString("email");
+                String avatar = rs.getString("avatar");
+                String address = rs.getString("address");
+                String password = rs.getString("password");
+                String phone = rs.getString("phone");
+                int roleid = rs.getInt("roleID");
+                boolean roleID = rs.getBoolean("roleID");
+                user = new Users(id, firstname, lastname, email, avatar, userName, password, address, phone, roleid, roleID);
 
-    Users getUserByName(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        } catch (Exception e) {
+            System.out.println("getUser: " + e.getMessage());
+        }
+        return user;
     }
 
     public void updateUser(String firstName, String lastName, String email, String address, String phone, String username, String avatar, int roleId) {
@@ -138,7 +161,7 @@ public class UserDAO extends DBContext {
         }
     }
 
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         //        UserDAO uList = new UserDAO();
         //        Users u = new Users(0,"Đạt","Đỗ","datdz@gmail.com","view/assets/home/img/users/1.jpg","datdo","1234567","Quận 7","012345678910",2,true);
         //        uList.registerUser(u);
@@ -149,6 +172,30 @@ public class UserDAO extends DBContext {
             System.out.println(user.getAvatar());
         } else {
             System.out.println("null");
+        }
+    }
+
+    public int getTotalUsers() {
+        int result = 0;
+        try {
+            stm = connection.prepareStatement(GET_TOTAL_USERS);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("Total");
+            }
+        } catch (Exception e) {
+            System.out.println("getUser: " + e.getMessage());
+        }
+        return result;
+    }
+
+    public void deleteUser(int uid) {
+        try {
+            stm = connection.prepareStatement(DELETE_USER);
+            stm.setInt(1, uid);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("getUser: " + e.getMessage());
         }
     }
 }
