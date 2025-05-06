@@ -68,7 +68,7 @@ public class CheckoutServlet extends HttpServlet {
             List<CartItem> cartItems = (List<CartItem>) session.getAttribute("CART");
             if (user != null && user.getRole() != 1 && paymentId != null) {
                 Payments payment = pmDAO.getPaymentById(Integer.parseInt(paymentId));
-                
+
                 for (CartItem item : cartItems) {
                     // Check quanity of product in stock
                     if (pDao.getStock(item.getProduct().getId()) > 5 && item.getQuantity() < item.getProduct().getStock()) {
@@ -76,33 +76,36 @@ public class CheckoutServlet extends HttpServlet {
                         totalQuantitys += item.getQuantity();
                     }
                 }
-                
+
                 LocalDateTime dateNow = LocalDateTime.now();
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String date = dateNow.format(format);
+                if (total == 0) {
+                    message = "You need choose product again ( quantity >0)";
+                } else {
+                    if (oDao.createNewOrder(date, total, payment, user)) {
+                        message = "Order Success";
 
-                if (oDao.createNewOrder(date, total, payment, user)) {
-                    message = "Order Success";
+                        orderLatest = oDao.getTheLatestOrder();
 
-                    orderLatest = oDao.getTheLatestOrder();
+                        for (CartItem cart : cartItems) {
+                            oiDao.createNewOrderDetail(cart, orderLatest);
+                            // Update product quantity
+                            pDao.updateQuantityProduct(cart);
+                        }
+                        cartItems = null;
+                        cookie = cUtil.getCookieByName(request, "Cart");
+                        cUtil.saveCartToCookie(request, response, emptyCart);
 
-                    for (CartItem cart : cartItems) {
-                        oiDao.createNewOrderDetail(cart, orderLatest);
-                        // Update product quantity
-                        pDao.updateQuantityProduct(cart);
+                        session.setAttribute("CART", cartItems);
+                        check = "true";
+                    } else {
+                        if (user == null) {
+                            message = "You need to log in to your account to checkout";
+                        } else if (user.getRole() == 1) {
+                            message = "Admin cannot perform this task";
+                        }
                     }
-                    cartItems = null;
-                    cookie = cUtil.getCookieByName(request, "Cart");
-                    cUtil.saveCartToCookie(request, response, emptyCart);
-
-                    session.setAttribute("CART", cartItems);
-                    check = "true";
-                }
-            } else {
-                if (user == null) {
-                    message = "You need to log in to your account to checkout";
-                } else if (user.getRole() == 1) {
-                    message = "Admin cannot perform this task";
                 }
             }
 

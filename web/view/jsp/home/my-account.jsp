@@ -77,14 +77,15 @@
                                                             <th>Actions</th>	 	 	 	
                                                         </tr>
                                                     </thead>
+                                                    
                                                     <tbody>
                                                         <c:if test="${requestScope.LISTORDERS!= null && !requestScope.LISTORDERS.isEmpty()}">
                                                             <c:forEach items="${requestScope.LISTORDERS}" var="o">
                                                                 <tr>
-                                                                    <td>${o.orderID}</td>
-                                                                    <td>${o.orderDate}</td>
-                                                                    <td><span class="success">${o.status == true ? "Đã giao" : "Chưa giao"}</span></td>
-                                                                    <td>${o.totalPrice}</td>
+                                                                    <td>${o.getOrderId()}</td>
+                                                                    <td>${o.getOrderDate()}</td>
+                                                                    <td><span class="success">${o.isStatus() == true ? "Đã giao" : "Chưa giao"}</span></td>
+                                                                    <td>${o.getTotalPrice()}</td>
                                                                     <td><a href="cart.html" class="view">view</a></td>
                                                                 </tr>
                                                             </c:forEach>

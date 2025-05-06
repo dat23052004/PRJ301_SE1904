@@ -274,21 +274,20 @@ function setCheck(obj) {
 //    });
 //}
 
-//function addProductToWishlist(action, product_id) {
-//    var action = action;
-//    var productId = product_id;
-//    $.ajax({
-//        url: "/DDShop/WishlistServlet",
-//        type: "get",
-//        data: {
-//            action: action,
-//            product_id: productId,
-//        },
-//        success: function (data) {
-//            var row = document.getElementById("wishlist-small");
-//            row.innerHTML = data;
-//        },
-//        error: function (xhr) {
-//        }
-//    });
-//}
+function addProductToWishlist(action, product_id) {
+    
+    $.ajax({
+        url: "/DDShop/WishlistServlet",
+        type: "get",
+        data: {
+            action: action,
+            product_id: product_id,
+        },
+        success: function (data) {
+            var row = document.getElementById("wishlist-small");
+            row.innerHTML = data;
+        },
+        error: function (xhr) {
+        }
+    });
+}

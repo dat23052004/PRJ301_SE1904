@@ -16,11 +16,11 @@
         <c:if test="${loop.index <= 2}">
             <div class="cart_item">
                 <div class="cart_img">
-                    <a href="SingleProductServlet?product_id=${p.id}"><img src="${p.images[0]}" alt=""></a>
+                    <a href="SingleProductServlet?product_id=${p.getId()}"><img src="${p.getImages()[0]}" alt=""></a>
                 </div>
                 <div class="cart_info">
-                    <a href="SingleProductServlet?product_id=${p.id}">${p.name}</a>
-                    <span class="cart_price">$${p.salePrice}</span>
+                    <a href="SingleProductServlet?product_id=${p.getId()}">${p.getName()}</a>
+                    <span class="cart_price">$${p.getSalePrice()}</span>
                 </div>
                 <!--                                                    <div class="cart_remove">
                                                                         <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>

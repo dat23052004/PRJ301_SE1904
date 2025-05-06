@@ -63,32 +63,7 @@
                                 <!--categorie menu end-->
 
 
-                                <c:if test="${sessionScope.WISHLIST != null}">
-                                    <!--wishlist block start-->
-                                    <div class="sidebar_widget wishlist mb-35" id="wishlist-small">
-                                        <div class="block_title">
-                                            <h3><a href="WishlistServlet">Wishlist</a></h3>
-                                        </div>
-                                        <c:forEach items="${sessionScope.WISHLIST}" var="p" varStatus="loop">
-                                            <c:if test="${loop.index <= 2}">
-                                                <div class="cart_item">
-                                                    <div class="cart_img">
-                                                        <a href="SingleProductServlet?product_id=${p.id}"><img src="${p.images[0]}" alt=""></a>
-                                                    </div>
-                                                    <div class="cart_info">
-                                                        <a href="SingleProductServlet?product_id=${p.id}">${p.name}</a>
-                                                        <span class="cart_price">$${p.salePrice}</span>
-                                                    </div>
-                                                </div>
-                                            </c:if>
-                                        </c:forEach>
-                                        <div class="block_content">
-                                            <p>${sessionScope.WISHLIST.size()}  products</p>
-                                            <a href="WishlistServlet">» My wishlists</a>
-                                        </div>
-                                    </div>
-                                    <!--wishlist block end-->
-                                </c:if>
+                                
                                     
                                 <c:if test="${sessionScope.account == null}">
                                     <!--newsletter block start-->
@@ -207,7 +182,7 @@
                                                                                 border-radius: 4px;
                                                                                 font-size: 13px;
                                                                                 padding: 2px 11px;
-                                                                                font-weight: 600;" onclick="addProductToWishlist('Add',${p.id})">Yêu thích</button></li>
+                                                                                font-weight: 600;" onclick="addProductToWishlist('Add',${p.getId()})">Yêu thích</button></li>
                                                                     <li><a href="SingleProductServlet?product_id=${p.id}" title="View Detail">Xem sản phẩm</a></li>
                                                                 </ul>
                                                             </div>
@@ -265,7 +240,7 @@
                                                                             border-radius: 4px;
                                                                             font-size: 13px;
                                                                             padding: 2px 11px;
-                                                                            font-weight: 600;" onclick="addProductToWishlist('Add',${p.id})">Yêu thích</button></li>
+                                                                            font-weight: 600;" onclick="addProductToWishlist('Add',${p.getId()})">Yêu thích</button></li>
                                                                 <li><a href="SingleProductServlet?product_id=${p.id}" title="View Detail">Xem sản phẩm</a></li>
                                                             </ul>
                                                         </div>

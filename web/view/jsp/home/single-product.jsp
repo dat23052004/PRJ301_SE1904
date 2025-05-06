@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../../common/taglib.jsp"%>
 <!DOCTYPE html>
+
 <html class="no-js" lang="zxx">
     <head>
         <meta charset="utf-8">
